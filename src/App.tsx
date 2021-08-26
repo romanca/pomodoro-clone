@@ -1,6 +1,5 @@
-import Layout from "./Components/Layout";
+import Layout from "./Components/layout";
 import Theme from "./Providers/Theme";
-import theme from "./shared/theme";
 
 const App = () => {
   return (
