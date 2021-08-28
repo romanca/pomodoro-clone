@@ -12,7 +12,7 @@ const ShortBreakCounter = () => {
         color: "white",
       }}
     >
-      5
+      5:00
     </Box>
   );
 };
