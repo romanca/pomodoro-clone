@@ -9,6 +9,7 @@ const Layout = () => {
         width: theme.space[8],
         height: theme.space[12],
         background: theme.colors.danger[1],
+        // background: "rgb(70, 142, 145)",
         justifyContent: "center",
       }}
     >
