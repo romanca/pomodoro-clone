@@ -4,7 +4,17 @@ import theme from "../shared/theme";
 import Counter from "./Counter";
 import Header from "./header";
 
-const LayoutContent = () => {
+interface IProps {
+  valueSelect: string;
+  switchContent: (value: string) => void;
+  toggleContent: any;
+}
+
+const LayoutContent: React.FC<IProps> = ({
+  valueSelect,
+  switchContent,
+  toggleContent,
+}) => {
   return (
     <Box
       style={{
@@ -20,7 +30,11 @@ const LayoutContent = () => {
         }}
       >
         <Box style={{ textAlign: "center", width: "100%" }}>
-          <Counter />
+          <Counter
+            valueSelect={valueSelect}
+            toggleContent={toggleContent}
+            switchContent={switchContent}
+          />
         </Box>
       </Box>
     </Box>

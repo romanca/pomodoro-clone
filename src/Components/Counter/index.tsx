@@ -1,11 +1,27 @@
 import React from "react";
 import { Box, Button, Flex } from "theme-ui";
 import theme from "../../shared/theme";
-import LongBreakCounter from "./longBreakCounter";
-import PomodoroCounter from "./pomodoroCounter";
-import ShortBreakCounter from "./shortBreakCounter";
 
-const Counter = () => {
+interface IProps {
+  valueSelect: string;
+  switchContent: (value: string) => void;
+  toggleContent: any;
+}
+
+const Counter: React.FC<IProps> = ({
+  valueSelect,
+  switchContent,
+  toggleContent,
+}) => {
+  const switchColors =
+    valueSelect === "pomodoroCounter"
+      ? theme.colors.danger[1]
+      : valueSelect === "shortBreakCounter"
+      ? "rgb(70, 142, 145)"
+      : valueSelect === "longBreakCounter"
+      ? "rgb(67, 126, 168)"
+      : theme.colors.danger[1];
+
   return (
     <Box
       sx={{
@@ -31,6 +47,8 @@ const Counter = () => {
           }}
         >
           <Button
+            onClick={toggleContent}
+            value={"pomodoroCounter"}
             sx={{
               border: "none",
               outline: "none",
@@ -39,7 +57,10 @@ const Counter = () => {
               fontSize: theme.fontSizes[1],
               height: theme.space[21],
               cursor: "pointer",
-              background: theme.colors.blacks[11],
+              background:
+                valueSelect === "pomodoroCounter"
+                  ? theme.colors.blacks[11]
+                  : "transparent",
               color: theme.colors.whites[8],
               opacity: theme.opacities[1],
               fontWeight: theme.fontWeights[9],
@@ -51,6 +72,8 @@ const Counter = () => {
             Pomodoro
           </Button>
           <Button
+            onClick={toggleContent}
+            value={"shortBreakCounter"}
             sx={{
               border: "none",
               color: theme.colors.whites[8],
@@ -60,8 +83,10 @@ const Counter = () => {
               height: theme.space[21],
               cursor: "pointer",
               fontWeight: theme.fontWeights[9],
-              // background: "transparent",
-              background: theme.colors.blacks[11],
+              background:
+                valueSelect === "shortBreakCounter"
+                  ? theme.colors.blacks[11]
+                  : "transparent",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -70,6 +95,8 @@ const Counter = () => {
             Short Break
           </Button>
           <Button
+            onClick={toggleContent}
+            value={"longBreakCounter"}
             sx={{
               border: "none",
               outline: "none",
@@ -79,8 +106,10 @@ const Counter = () => {
               fontSize: theme.fontSizes[1],
               height: theme.space[21],
               cursor: "pointer",
-              // background: "transparent",
-              background: "none rgba(0, 0, 0, 0.15)",
+              background:
+                valueSelect === "longBreakCounter"
+                  ? theme.colors.blacks[11]
+                  : "transparent",
               fontWeight: theme.fontWeights[9],
               display: "flex",
               justifyContent: "center",
@@ -90,9 +119,7 @@ const Counter = () => {
             Long Break
           </Button>
         </Flex>
-        <PomodoroCounter />
-        {/* <LongBreakCounter /> */}
-        {/* <ShortBreakCounter /> */}
+        {switchContent(valueSelect)}
         <Button
           sx={{
             cursor: "pointer",
@@ -103,7 +130,7 @@ const Counter = () => {
             fontFamily: "ArialRoundedMTBold",
             fontSize: theme.fontSizes[6],
             height: theme.space[22],
-            color: theme.colors.danger[1],
+            color: switchColors,
             fontWeight: theme.fontWeights[9],
             width: theme.space[23],
             backgroundColor: theme.colors.whites[8],
