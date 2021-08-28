@@ -1,6 +1,9 @@
 {
   "name": "pomodoro-clone",
+
+
   "homepage": "https://romanca.github.io/pomodoro-clone/",
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {

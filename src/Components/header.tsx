@@ -54,7 +54,6 @@ const Header = () => {
               cursor: "pointer",
               opacity: theme.radii[8],
               background: "none rgba(255, 255, 255, 0.2)",
-              margin: theme.space[10],
               fontSize: theme.fontSizes[0],
               minWidth: theme.space[11],
               border: "none",
