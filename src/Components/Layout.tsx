@@ -4,7 +4,7 @@ import theme from "../shared/theme";
 import LayoutContent from "./layoutContent";
 
 const Layout = () => {
-  const { valueSelect, toggleContent, switchContent } = useToggleContent();
+  const { valueSelect, toggleContent } = useToggleContent();
 
   const switchColors =
     valueSelect === "pomodoroCounter"
@@ -24,11 +24,7 @@ const Layout = () => {
         background: switchColors,
       }}
     >
-      <LayoutContent
-        valueSelect={valueSelect}
-        toggleContent={toggleContent}
-        switchContent={switchContent}
-      />
+      <LayoutContent valueSelect={valueSelect} toggleContent={toggleContent} />
     </Flex>
   );
 };

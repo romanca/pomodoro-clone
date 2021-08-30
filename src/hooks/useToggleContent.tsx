@@ -7,28 +7,32 @@ const useToggleContent = () => {
   const [valueSelect, setValueSelect] =
     React.useState<string>("pomodoroCounter");
 
-  const toggleContent = (e: any) => {
-    setValueSelect(e.target.value);
+  const toggleContent = (content: string) => {
+    setValueSelect(content);
   };
 
-  const switchContent = (value: string) => {
-    switch (value) {
-      case "pomodoroCounter":
-        return <PomodoroCounter />;
-      case "shortBreakCounter":
-        return <ShortBreakCounter />;
-      case "longBreakCounter":
-        return <LongBreakCounter />;
-      default:
-        return null;
-    }
-  };
+  // const toggleContent = (e: any) => {
+  //   setValueSelect(e.target.value);
+  // };
+
+  // const switchContent = (value: string) => {
+  //   switch (value) {
+  //     case "pomodoroCounter":
+  //       return <PomodoroCounter />;
+  //     case "shortBreakCounter":
+  //       return <ShortBreakCounter />;
+  //     case "longBreakCounter":
+  //       return <LongBreakCounter />;
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   return {
     valueSelect,
     setValueSelect,
     toggleContent,
-    switchContent,
+    // switchContent,
   };
 };
 export default useToggleContent;
