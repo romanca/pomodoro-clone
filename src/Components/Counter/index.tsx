@@ -1,18 +1,16 @@
 import React from "react";
 import { Box, Button, Flex } from "theme-ui";
 import theme from "../../shared/theme";
+import LongBreakCounter from "./longBreakCounter";
+import PomodoroCounter from "./pomodoroCounter";
+import ShortBreakCounter from "./shortBreakCounter";
 
 interface IProps {
   valueSelect: string;
-  switchContent: (value: string) => void;
   toggleContent: any;
 }
 
-const Counter: React.FC<IProps> = ({
-  valueSelect,
-  switchContent,
-  toggleContent,
-}) => {
+const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
   const switchColors =
     valueSelect === "pomodoroCounter"
       ? theme.colors.danger[1]
@@ -21,6 +19,19 @@ const Counter: React.FC<IProps> = ({
       : valueSelect === "longBreakCounter"
       ? "rgb(67, 126, 168)"
       : theme.colors.danger[1];
+
+  const switchCounters = () => {
+    if (valueSelect === "pomodoroCounter") {
+      return <PomodoroCounter />;
+    } else if (valueSelect === "shortBreakCounter") {
+      return <ShortBreakCounter />;
+    }
+    return <LongBreakCounter />;
+  };
+
+  const getValueHandler = (value: string) => () => {
+    toggleContent(value);
+  };
 
   return (
     <Box
@@ -47,8 +58,7 @@ const Counter: React.FC<IProps> = ({
           }}
         >
           <Button
-            onClick={toggleContent}
-            value={"pomodoroCounter"}
+            onClick={getValueHandler("pomodoroCounter")}
             sx={{
               border: "none",
               outline: "none",
@@ -72,8 +82,7 @@ const Counter: React.FC<IProps> = ({
             Pomodoro
           </Button>
           <Button
-            onClick={toggleContent}
-            value={"shortBreakCounter"}
+            onClick={getValueHandler("shortBreakCounter")}
             sx={{
               border: "none",
               color: theme.colors.whites[8],
@@ -95,8 +104,7 @@ const Counter: React.FC<IProps> = ({
             Short Break
           </Button>
           <Button
-            onClick={toggleContent}
-            value={"longBreakCounter"}
+            onClick={getValueHandler("longBreakCounter")}
             sx={{
               border: "none",
               outline: "none",
@@ -119,7 +127,7 @@ const Counter: React.FC<IProps> = ({
             Long Break
           </Button>
         </Flex>
-        {switchContent(valueSelect)}
+        {switchCounters()}
         <Button
           sx={{
             cursor: "pointer",

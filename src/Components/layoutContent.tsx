@@ -6,15 +6,10 @@ import Header from "./header";
 
 interface IProps {
   valueSelect: string;
-  switchContent: (value: string) => void;
   toggleContent: any;
 }
 
-const LayoutContent: React.FC<IProps> = ({
-  valueSelect,
-  switchContent,
-  toggleContent,
-}) => {
+const LayoutContent: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
   return (
     <Box
       style={{
@@ -30,11 +25,7 @@ const LayoutContent: React.FC<IProps> = ({
         }}
       >
         <Box style={{ textAlign: "center", width: "100%" }}>
-          <Counter
-            valueSelect={valueSelect}
-            toggleContent={toggleContent}
-            switchContent={switchContent}
-          />
+          <Counter valueSelect={valueSelect} toggleContent={toggleContent} />
         </Box>
       </Box>
     </Box>
