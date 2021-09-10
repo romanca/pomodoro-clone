@@ -6,7 +6,7 @@ import Header from "./header";
 
 interface IProps {
   valueSelect: string;
-  toggleContent: any;
+  toggleContent: (content: string) => void;
 }
 
 const LayoutContent: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
