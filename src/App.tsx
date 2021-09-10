@@ -1,10 +1,13 @@
 import Layout from "./Components/layout";
+import ModalProvider from "./Providers/ModalProvider";
 import Theme from "./Providers/Theme";
 
 const App = () => {
   return (
     <Theme>
-      <Layout />
+      <ModalProvider>
+        <Layout />
+      </ModalProvider>
     </Theme>
   );
 };
