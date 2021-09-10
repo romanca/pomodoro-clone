@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const PomodoroCounter: React.FC<IProps> = ({ valueSelect }) => {
-  const { seconds, minutes, startCounter, isActive }: any = useCounter(0, 11);
+  const { seconds, minutes, startCounter, isActive }: any = useCounter(0, 25);
 
   return (
     <Flex
