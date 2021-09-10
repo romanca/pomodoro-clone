@@ -7,26 +7,17 @@ import ShortBreakCounter from "./shortBreakCounter";
 
 interface IProps {
   valueSelect: string;
-  toggleContent: any;
+  toggleContent: (content: string) => void;
 }
 
 const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
-  const switchColors =
-    valueSelect === "pomodoroCounter"
-      ? theme.colors.danger[1]
-      : valueSelect === "shortBreakCounter"
-      ? "rgb(70, 142, 145)"
-      : valueSelect === "longBreakCounter"
-      ? "rgb(67, 126, 168)"
-      : theme.colors.danger[1];
-
   const switchCounters = () => {
     if (valueSelect === "pomodoroCounter") {
-      return <PomodoroCounter />;
+      return <PomodoroCounter valueSelect={valueSelect} />;
     } else if (valueSelect === "shortBreakCounter") {
-      return <ShortBreakCounter />;
+      return <ShortBreakCounter valueSelect={valueSelect} />;
     }
-    return <LongBreakCounter />;
+    return <LongBreakCounter valueSelect={valueSelect} />;
   };
 
   const getValueHandler = (value: string) => () => {
@@ -128,24 +119,6 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           </Button>
         </Flex>
         {switchCounters()}
-        <Button
-          sx={{
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            margin: "20px 0px 0px",
-            borderRadius: theme.fontSizes[0],
-            fontFamily: "ArialRoundedMTBold",
-            fontSize: theme.fontSizes[6],
-            height: theme.space[22],
-            color: switchColors,
-            fontWeight: theme.fontWeights[9],
-            width: theme.space[23],
-            backgroundColor: theme.colors.whites[8],
-          }}
-        >
-          START
-        </Button>
       </Box>
     </Box>
   );

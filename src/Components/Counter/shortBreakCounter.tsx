@@ -1,19 +1,61 @@
 import React from "react";
-import { Box } from "theme-ui";
+import { Box, Flex, Button } from "theme-ui";
+import useCounter from "../../hooks/useCounter";
+import theme from "../../shared/theme";
 
-const ShortBreakCounter = () => {
+interface IProps {
+  valueSelect: string;
+}
+
+const ShortBreakCounter: React.FC<IProps> = ({ valueSelect }) => {
+  const { seconds, startCounter, isActive, minutes } = useCounter(0, 5);
+  const switchColors =
+    valueSelect === "pomodoroCounter"
+      ? theme.colors.danger[1]
+      : valueSelect === "shortBreakCounter"
+      ? "rgb(70, 142, 145)"
+      : valueSelect === "longBreakCounter"
+      ? "rgb(67, 126, 168)"
+      : theme.colors.danger[1];
+
   return (
-    <Box
+    <Flex
       sx={{
         fontSize: 120,
         fontWeight: "bold",
         marginTop: 20,
         fontFamily: "ArialRoundedMTBold",
         color: "white",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
       }}
     >
-      5:00
-    </Box>
+      <Flex>
+        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
+        <Box>:</Box>
+        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
+      </Flex>
+      <Button
+        onClick={startCounter}
+        sx={{
+          cursor: "pointer",
+          border: "none",
+          outline: "none",
+          margin: "20px 0px 0px",
+          borderRadius: theme.fontSizes[0],
+          fontFamily: "ArialRoundedMTBold",
+          fontSize: theme.fontSizes[6],
+          height: theme.space[22],
+          color: switchColors,
+          fontWeight: theme.fontWeights[9],
+          width: theme.space[23],
+          backgroundColor: theme.colors.whites[8],
+        }}
+      >
+        {isActive ? "STOP" : "START"}
+      </Button>
+    </Flex>
   );
 };
 
