@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Button, Flex } from "theme-ui";
+import { useLabelConfirmDialog } from "../../Providers/ModalProvider";
 import theme from "../../shared/theme";
 import LongBreakCounter from "./longBreakCounter";
 import PomodoroCounter from "./pomodoroCounter";
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
+  const openLabelConfirmDialog = useLabelConfirmDialog();
   const switchCounters = () => {
     if (valueSelect === "pomodoroCounter") {
       return <PomodoroCounter valueSelect={valueSelect} />;
@@ -49,7 +51,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           }}
         >
           <Button
-            onClick={getValueHandler("pomodoroCounter")}
+            // onClick={getValueHandler("pomodoroCounter")}
+            onClick={openLabelConfirmDialog}
             sx={{
               border: "none",
               outline: "none",
@@ -73,7 +76,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
             Pomodoro
           </Button>
           <Button
-            onClick={getValueHandler("shortBreakCounter")}
+            // onClick={getValueHandler("shortBreakCounter")}
+            onClick={openLabelConfirmDialog}
             sx={{
               border: "none",
               color: theme.colors.whites[8],
@@ -95,7 +99,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
             Short Break
           </Button>
           <Button
-            onClick={getValueHandler("longBreakCounter")}
+            // onClick={getValueHandler("longBreakCounter")}
+            onClick={openLabelConfirmDialog}
             sx={{
               border: "none",
               outline: "none",
