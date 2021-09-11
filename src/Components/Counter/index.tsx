@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
-  const [isActive, setIsActive] = React.useState(false);
+  const [isActive, setIsActive] = React.useState<boolean>(false);
   const switchCounters = () => {
     if (valueSelect === "pomodoroCounter") {
       return (
