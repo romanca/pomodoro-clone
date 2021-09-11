@@ -5,8 +5,8 @@ import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
-  handleActive: any;
-  isActive: any;
+  handleActive: () => void;
+  isActive: boolean;
 }
 
 const LongBreakCounter: React.FC<IProps> = ({

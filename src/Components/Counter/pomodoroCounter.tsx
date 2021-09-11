@@ -5,8 +5,8 @@ import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
-  isActive: any;
-  handleActive: any;
+  isActive: boolean;
+  handleActive: () => void;
 }
 
 const PomodoroCounter: React.FC<IProps> = ({

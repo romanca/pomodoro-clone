@@ -6,7 +6,7 @@ interface IProps {
   valueSelect: string;
   startCounter: any;
   isActive: boolean;
-  handleActive: any;
+  handleActive: () => void;
 }
 
 const CounterButton: React.FC<IProps> = ({
