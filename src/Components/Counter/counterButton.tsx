@@ -6,12 +6,14 @@ interface IProps {
   valueSelect: string;
   startCounter: any;
   isActive: boolean;
+  handleActive: any;
 }
 
 const CounterButton: React.FC<IProps> = ({
   valueSelect,
   startCounter,
   isActive,
+  handleActive,
 }) => {
   const switchColors =
     valueSelect === "pomodoroCounter"
@@ -22,9 +24,14 @@ const CounterButton: React.FC<IProps> = ({
       ? "rgb(67, 126, 168)"
       : theme.colors.danger[1];
 
+  const handleStartCounter = () => {
+    startCounter();
+    handleActive();
+  };
+
   return (
     <Button
-      onClick={startCounter}
+      onClick={handleStartCounter}
       sx={{
         cursor: "pointer",
         border: "none",

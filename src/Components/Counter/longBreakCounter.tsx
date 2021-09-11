@@ -5,10 +5,16 @@ import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
+  handleActive: any;
+  isActive: any;
 }
 
-const LongBreakCounter: React.FC<IProps> = ({ valueSelect }) => {
-  const { seconds, startCounter, isActive, minutes } = useCounter(0, 15);
+const LongBreakCounter: React.FC<IProps> = ({
+  valueSelect,
+  handleActive,
+  isActive,
+}) => {
+  const { seconds, startCounter, minutes } = useCounter(0, 15);
 
   return (
     <Flex
@@ -32,6 +38,7 @@ const LongBreakCounter: React.FC<IProps> = ({ valueSelect }) => {
         startCounter={startCounter}
         valueSelect={valueSelect}
         isActive={isActive}
+        handleActive={handleActive}
       />
     </Flex>
   );
