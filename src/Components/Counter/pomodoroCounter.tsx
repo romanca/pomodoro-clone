@@ -5,10 +5,16 @@ import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
+  isActive: any;
+  handleActive: any;
 }
 
-const PomodoroCounter: React.FC<IProps> = ({ valueSelect }) => {
-  const { seconds, minutes, startCounter, isActive }: any = useCounter(0, 25);
+const PomodoroCounter: React.FC<IProps> = ({
+  valueSelect,
+  isActive,
+  handleActive,
+}) => {
+  const { seconds, minutes, startCounter }: any = useCounter(0, 25);
 
   return (
     <Flex
@@ -32,6 +38,7 @@ const PomodoroCounter: React.FC<IProps> = ({ valueSelect }) => {
         startCounter={startCounter}
         valueSelect={valueSelect}
         isActive={isActive}
+        handleActive={handleActive}
       />
     </Flex>
   );
