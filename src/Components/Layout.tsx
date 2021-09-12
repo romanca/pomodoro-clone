@@ -19,9 +19,6 @@ const Layout = () => {
     <Flex
       sx={{
         width: theme.space[8],
-        "@media screen and (min-width: 50%)": {
-          width: "100%",
-        },
         height: theme.space[12],
         justifyContent: "center",
         background: switchColors,

@@ -19,6 +19,7 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           valueSelect={valueSelect}
           isActive={isActive}
           handleActive={handleActive}
+          handleStopCounter={handleStopCounter}
         />
       );
     } else if (valueSelect === "shortBreakCounter") {
@@ -27,6 +28,7 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           valueSelect={valueSelect}
           handleActive={handleActive}
           isActive={isActive}
+          handleStopCounter={handleStopCounter}
         />
       );
     }
@@ -35,6 +37,7 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
         valueSelect={valueSelect}
         handleActive={handleActive}
         isActive={isActive}
+        handleStopCounter={handleStopCounter}
       />
     );
   };
@@ -54,6 +57,21 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
       }
     } else {
       toggleContent(value);
+    }
+  };
+
+  const handleStopCounter = () => {
+    if (isActive) {
+      const alertMessage = window.confirm(
+        "Are you sure you wanto stop the counter?"
+      );
+      if (alertMessage && valueSelect === "pomodoroCounter") {
+        toggleContent("shortBreakCounter");
+        handleActive();
+      } else {
+        toggleContent("pomodoroCounter");
+        handleActive();
+      }
     }
   };
 
