@@ -1,18 +1,21 @@
 import React from "react";
 import { Box, Flex } from "theme-ui";
 import useCounter from "../../hooks/useCounter";
+import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
   handleActive: () => void;
   isActive: boolean;
+  handleStopCounter: () => void;
 }
 
 const ShortBreakCounter: React.FC<IProps> = ({
   valueSelect,
   handleActive,
   isActive,
+  handleStopCounter,
 }) => {
   const { seconds, startCounter, minutes } = useCounter(0, 5);
 
@@ -40,6 +43,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
         isActive={isActive}
         handleActive={handleActive}
       />
+      <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
     </Flex>
   );
 };

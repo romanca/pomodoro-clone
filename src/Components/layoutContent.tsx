@@ -24,7 +24,12 @@ const LayoutContent: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           borderTop: "1px solid rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Box style={{ textAlign: "center", width: "100%" }}>
+        <Box
+          sx={{
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
           <Counter valueSelect={valueSelect} toggleContent={toggleContent} />
         </Box>
       </Box>

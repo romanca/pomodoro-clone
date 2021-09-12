@@ -1,18 +1,21 @@
 import React from "react";
 import { Box, Flex } from "theme-ui";
 import useCounter from "../../hooks/useCounter";
+import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 
 interface IProps {
   valueSelect: string;
   isActive: boolean;
   handleActive: () => void;
+  handleStopCounter: () => void;
 }
 
 const PomodoroCounter: React.FC<IProps> = ({
   valueSelect,
   isActive,
   handleActive,
+  handleStopCounter,
 }) => {
   const { seconds, minutes, startCounter }: any = useCounter(0, 25);
 
@@ -40,6 +43,7 @@ const PomodoroCounter: React.FC<IProps> = ({
         isActive={isActive}
         handleActive={handleActive}
       />
+      <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
     </Flex>
   );
 };

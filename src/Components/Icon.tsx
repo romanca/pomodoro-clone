@@ -4,6 +4,8 @@ import { Box } from "theme-ui";
 const IconNamesMap = {
   checkCircle: "fa fa-check-circle",
   settings: "fa fa-cog",
+  rightArrow: "fa fa-caret-right",
+  minus: "fa fa-minus",
 };
 
 export type IconName = keyof typeof IconNamesMap;
