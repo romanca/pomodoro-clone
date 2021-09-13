@@ -26,14 +26,13 @@ const SettingsModalContent = () => {
         >
           TIMER SETTING
         </Box>
-        <Box
+        <Flex
           onClick={closeModalDialog}
           sx={{
             cursor: "pointer",
             fontSize: 35,
             width: 30,
             height: 25,
-            display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
           }}
@@ -50,7 +49,7 @@ const SettingsModalContent = () => {
           >
             +
           </Box>
-        </Box>
+        </Flex>
       </Flex>
       <SettingsInputs />
     </Box>
