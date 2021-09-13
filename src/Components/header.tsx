@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Button, Flex } from "theme-ui";
+import { Flex } from "theme-ui";
 import theme from "../shared/theme";
 import Icon from "./Icon";
+import Settings from "./settings/settings";
 
 const Header = () => {
   return (
@@ -11,6 +12,7 @@ const Header = () => {
         height: theme.space[5],
         justifyContent: "center",
         alignItems: "center",
+        fontFamily: "ArialRoundedMTBold",
       }}
     >
       <Flex
@@ -38,40 +40,7 @@ const Header = () => {
           />
           <span>Pomocounter</span>
         </Flex>
-        <Flex
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-              borderRadius: theme.borderRadiuss[8],
-              cursor: "pointer",
-              opacity: theme.radii[8],
-              background: "none rgba(255, 255, 255, 0.2)",
-              fontSize: theme.fontSizes[0],
-              minWidth: theme.space[11],
-              border: "none",
-              outline: "none",
-              color: theme.colors.whites[8],
-              fontWeight: theme.fontWeights[5],
-            }}
-          >
-            <Icon
-              name="settings"
-              style={{
-                marginRight: theme.space[0],
-                fontSize: theme.fontSizes[2],
-              }}
-            />
-            <Box>Settings</Box>
-          </Button>
-        </Flex>
+        <Settings />
       </Flex>
     </Flex>
   );
