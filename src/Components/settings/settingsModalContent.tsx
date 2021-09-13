@@ -12,6 +12,7 @@ const SettingsModalContent = () => {
         justifyContent: "space-between",
         marginBottom: 16,
         marginTop: 10,
+        fontFamily: "ArialRoundedMTBold",
       }}
     >
       <Box
@@ -29,7 +30,6 @@ const SettingsModalContent = () => {
         sx={{
           cursor: "pointer",
           fontSize: 35,
-          fontWeight: "bold",
           width: 30,
           height: 25,
           display: "flex",

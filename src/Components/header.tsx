@@ -1,5 +1,5 @@
 import React from "react";
-import {  Flex } from "theme-ui";
+import { Flex } from "theme-ui";
 import theme from "../shared/theme";
 import Icon from "./Icon";
 import Settings from "./settings/settings";
@@ -12,6 +12,7 @@ const Header = () => {
         height: theme.space[5],
         justifyContent: "center",
         alignItems: "center",
+        fontFamily: "ArialRoundedMTBold",
       }}
     >
       <Flex

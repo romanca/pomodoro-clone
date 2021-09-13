@@ -30,6 +30,7 @@ const Settings = () => {
           outline: "none",
           color: theme.colors.whites[8],
           fontWeight: theme.fontWeights[5],
+          fontFamily: "ArialRoundedMTBold",
         }}
       >
         <Icon
