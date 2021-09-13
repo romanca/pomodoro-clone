@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import SettingsModalContent from "../Components/settings/settingsModalContent";
 import ModalDialog from "../shared/modal";
 
 interface IProps {
@@ -39,7 +40,7 @@ export const useLabelConfirmDialog = () => {
   const { setDialog } = useModal();
 
   return () => {
-    setDialog();
+    setDialog(<SettingsModalContent />);
   };
 };
 

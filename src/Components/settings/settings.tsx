@@ -1,9 +1,11 @@
 import { Box, Button, Flex } from "@theme-ui/components";
 import React from "react";
-import theme from "../shared/theme";
-import Icon from "./Icon";
+import { useLabelConfirmDialog } from "../../Providers/ModalProvider";
+import theme from "../../shared/theme";
+import Icon from "../Icon";
 
 const Settings = () => {
+  const openLabelConfirmDialog = useLabelConfirmDialog();
   return (
     <Flex
       sx={{
@@ -12,6 +14,7 @@ const Settings = () => {
       }}
     >
       <Button
+        onClick={openLabelConfirmDialog}
         sx={{
           display: "flex",
           alignItems: "center",
