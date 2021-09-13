@@ -3,7 +3,7 @@ import ModalDialog from "../shared/modal";
 
 interface IProps {
   setDialog?: any;
-  closeModalDialog?: any;
+  closeModalDialog?: () => void;
 }
 
 const ModalContext = createContext<IProps | null>(null);
