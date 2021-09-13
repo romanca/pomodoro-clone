@@ -12,10 +12,10 @@ const LongBreakInput = () => {
           marginBottom: "4px",
         }}
       >
-        Short Break
+        Long Break
       </Box>
       <Input
-        value={5}
+        value={15}
         sx={{
           borderRadius: "4px",
           background: "rgb(239, 239, 239)",
