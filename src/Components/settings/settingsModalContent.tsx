@@ -1,6 +1,7 @@
 import { Box, Flex } from "@theme-ui/components";
 import React from "react";
 import { useModal } from "../../Providers/ModalProvider";
+import theme from "../../shared/theme";
 import SettingsInputs from "./settingsInputs";
 
 const SettingsModalContent = () => {
@@ -9,16 +10,16 @@ const SettingsModalContent = () => {
     <Box>
       <Flex
         sx={{
-          width: "100%",
+          width: theme.space[8],
           justifyContent: "space-between",
-          marginBottom: 16,
-          marginTop: 10,
+          marginBottom: theme.space[3],
+          marginTop: theme.space[10],
           fontFamily: "ArialRoundedMTBold",
         }}
       >
         <Box
           sx={{
-            fontSize: 16,
+            fontSize: theme.space[3],
             color: "rgb(187, 187, 187)",
             textTransform: "uppercase",
             fontWeight: "bold",
@@ -30,9 +31,9 @@ const SettingsModalContent = () => {
           onClick={closeModalDialog}
           sx={{
             cursor: "pointer",
-            fontSize: 35,
-            width: 30,
-            height: 25,
+            fontSize: theme.space[37],
+            width: theme.space[38],
+            height: theme.space[39],
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
@@ -42,10 +43,10 @@ const SettingsModalContent = () => {
             sx={{
               transform: "rotate(45deg)",
               color: "black",
-              marginLeft: 15,
-              marginTop: -10,
-              opacity: 0.2,
-              zIndex: 2147483647,
+              marginLeft: theme.space[40],
+              marginTop: theme.space[41],
+              opacity: theme.space[42],
+              zIndex: theme.space[43],
             }}
           >
             +

@@ -1,5 +1,6 @@
-import { Box, Button, Flex } from "@theme-ui/components";
+import { Box, Button } from "@theme-ui/components";
 import React from "react";
+import theme from "../../shared/theme";
 import Icon from "../Icon";
 
 interface IProps {
@@ -16,31 +17,31 @@ const ArrowButton: React.FC<IProps> = ({ isActive, handleStopCounter }) => {
           sx={{
             cursor: "pointer",
             border: "none",
-            width: 58,
-            height: 58,
+            width: theme.space[24],
+            height: theme.space[24],
             alignItems: "center",
             justifyContent: "center",
             display: "flex",
-            fontSize: 35,
+            fontSize: theme.space[25],
             position: "absolute",
-            right: 540,
-            top: 335,
+            right: theme.space[26],
+            top: theme.space[27],
             background: "transparent",
           }}
         >
           <Icon name="rightArrow" />
           <Box
             sx={{
-              width: 28,
-              height: 28,
-              fontSize: 23,
-              marginTop: 0,
+              width: theme.space[21],
+              height: theme.space[21],
+              fontSize: theme.space[28],
+              marginTop: theme.space[29],
               alignItems: "center",
               justifyContent: "center",
               display: "flex",
               transform: "rotate(90deg)",
               position: "absolute",
-              marginLeft: 3,
+              marginLeft: theme.space[30],
             }}
           >
             <Icon name="minus" />

@@ -1,5 +1,6 @@
 import { Box } from "@theme-ui/components";
 import React from "react";
+import theme from "../../shared/theme";
 import LongBreakInput from "./longBreakInput";
 import PomodoroInput from "./pomodoroInput";
 import ShortBreakInput from "./shortBreakInput";
@@ -8,9 +9,10 @@ const SettingsInputs = () => {
   return (
     <Box
       sx={{
-        borderTop: "1px solid rgba(182, 165, 166, 0.2)",
-        borderBottom: "1px solid rgba(182, 165, 166, 0.2)",
-        padding: "20px 0px",
+        borderTop: `${theme.space[36]} solid ${theme.colors.danger[2]}`,
+        borderBottom: `${theme.space[36]} solid ${theme.colors.danger[2]}`,
+        paddingTop: theme.space[16],
+        paddingBottom: theme.space[16],
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -19,7 +21,7 @@ const SettingsInputs = () => {
     >
       <Box
         sx={{
-          color: "rgb(85, 85, 85)",
+          color: theme.colors.greys[2],
           fontWeight: "bold",
           display: "flex",
           alignItems: "center",
@@ -31,7 +33,7 @@ const SettingsInputs = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "10px",
+          marginTop: theme.space[35],
         }}
       >
         <PomodoroInput />

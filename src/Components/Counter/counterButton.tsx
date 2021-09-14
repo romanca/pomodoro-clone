@@ -36,7 +36,7 @@ const CounterButton: React.FC<IProps> = ({
         cursor: "pointer",
         border: "none",
         outline: "none",
-        margin: "20px 0px 0px",
+        marginTop: theme.space[16],
         borderRadius: theme.fontSizes[0],
         fontFamily: "ArialRoundedMTBold",
         fontSize: theme.fontSizes[6],
