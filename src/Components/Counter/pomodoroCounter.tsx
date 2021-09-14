@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Flex } from "theme-ui";
 import useCounter from "../../hooks/useCounter";
+import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 
@@ -22,9 +23,9 @@ const PomodoroCounter: React.FC<IProps> = ({
   return (
     <Flex
       sx={{
-        fontSize: 120,
+        fontSize: theme.space[31],
         fontWeight: "bold",
-        marginTop: 20,
+        marginTop: theme.space[9],
         fontFamily: "ArialRoundedMTBold",
         color: "white",
         alignItems: "center",

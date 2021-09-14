@@ -1,15 +1,16 @@
 import { Box, Input } from "@theme-ui/components";
 import React from "react";
+import theme from "../../shared/theme";
 
 const ShortBreakInput = () => {
   return (
-    <Box sx={{ width: "98px" }}>
+    <Box sx={{ width: theme.space[32] }}>
       <Box
         sx={{
           display: "block",
-          fontSize: "14px",
-          color: "rgb(187, 187, 187)",
-          marginBottom: "4px",
+          fontSize: theme.space[33],
+          color: theme.colors.greys[0],
+          marginBottom: theme.space[34],
         }}
       >
         Short Break
@@ -17,14 +18,14 @@ const ShortBreakInput = () => {
       <Input
         value={5}
         sx={{
-          borderRadius: "4px",
-          background: "rgb(239, 239, 239)",
-          fontSize: "16px",
-          padding: "10px",
+          borderRadius: theme.space[34],
+          background: theme.colors.greys[1],
+          fontSize: theme.space[3],
+          padding: theme.space[35],
           boxShadow: "none",
           border: "none",
-          color: "rgb(85, 85, 85)",
-          width: "100%",
+          color: theme.colors.greys[2],
+          width: theme.space[8],
           boxSizing: "border-box",
           fontFamily: "ArialRoundedMTBold",
         }}

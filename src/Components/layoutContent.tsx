@@ -19,15 +19,14 @@ const LayoutContent: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
       <Header />
       <Box
         sx={{
-          padding: "0px 12px",
           margin: "auto",
-          borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+          borderTop: `${theme.borders[0]} solid ${theme.colors.blacks[12]}`,
         }}
       >
         <Box
           sx={{
             textAlign: "center",
-            width: "100%",
+            width: theme.space[8],
           }}
         >
           <Counter valueSelect={valueSelect} toggleContent={toggleContent} />
