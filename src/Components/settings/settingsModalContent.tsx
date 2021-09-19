@@ -6,8 +6,28 @@ import SettingsInputs from "./settingsInputs";
 
 const SettingsModalContent = () => {
   const { closeModalDialog } = useModal();
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = React.useCallback(
+    (e: MouseEvent) => {
+      const el = e.target;
+
+      if (el instanceof Node && ref.current && !ref.current.contains(el)) {
+        closeModalDialog();
+      }
+    },
+    [closeModalDialog]
+  );
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return function cleanup() {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
-    <Box>
+    <Box ref={ref}>
       <Flex
         sx={{
           width: theme.space[8],
