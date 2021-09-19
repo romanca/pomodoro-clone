@@ -16,6 +16,11 @@ const useCounter = (initSeconds: number, initMinutes: number) => {
   };
 
   React.useEffect(() => {
+    setSeconds(initSeconds);
+    setMinutes(initMinutes);
+  }, [initMinutes, initSeconds]);
+
+  React.useEffect(() => {
     var interval: any = null;
     if (start) {
       interval = setInterval(() => {
