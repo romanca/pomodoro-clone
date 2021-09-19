@@ -18,7 +18,7 @@ const PomodoroCounter: React.FC<IProps> = ({
   handleActive,
   handleStopCounter,
 }) => {
-  const { seconds, minutes, startCounter }: any = useCounter(0, 25);
+  const { seconds, minutes, startCounter } = useCounter(0, 25);
 
   return (
     <Flex
