@@ -1,4 +1,4 @@
-import { Box, Flex } from "@theme-ui/components";
+import { Box, Button, Flex } from "@theme-ui/components";
 import React from "react";
 import { useModal } from "../../Providers/ModalProvider";
 import theme from "../../shared/theme";
@@ -54,6 +54,37 @@ const SettingsModalContent = () => {
         </Box>
       </Flex>
       <SettingsInputs />
+      <Box
+        style={{
+          padding: "14px 20px",
+          textAlign: "right",
+          borderBottomLeftRadius: 8,
+          borderBottomRightRadius: 8,
+          backgroundColor: "rgb(239, 239, 239)",
+        }}
+      >
+        <Button
+          onClick={closeModalDialog}
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            borderRadius: 4,
+            cursor: "pointer",
+            boxShadow: "rgb(0 0 0 / 20%) 0px 2px 2px",
+            color: "white",
+            opacity: 0.9,
+            fontSize: 14,
+            padding: "8px 12px",
+            minWidth: 70,
+            backgroundColor: "rgb(34, 34, 34)",
+            border: "2px solid rgb(34, 34, 34)",
+            display: "inline-block",
+          }}
+        >
+          OK
+        </Button>
+      </Box>
     </Box>
   );
 };

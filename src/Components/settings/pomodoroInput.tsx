@@ -48,7 +48,7 @@ const PomodoroInput = () => {
           fontFamily: "ArialRoundedMTBold",
         }}
       />
-      <button onClick={() => dispatch(addPomodoroTime(countTime))}>add</button>
+      {/* <button onClick={() => dispatch(addPomodoroTime(countTime))}>add</button> */}
     </Box>
   );
 };
