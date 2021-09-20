@@ -4,6 +4,7 @@ import useCounter from "../../hooks/useCounter";
 import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
+import { useSelector } from "react-redux";
 
 interface IProps {
   valueSelect: string;
@@ -18,7 +19,8 @@ const LongBreakCounter: React.FC<IProps> = ({
   isActive,
   handleStopCounter,
 }) => {
-  const { seconds, startCounter, minutes } = useCounter(0, 15);
+  const time = useSelector((state: RootState) => state.pomodoroCounter);
+  const { seconds, startCounter, minutes } = useCounter(0, time.long);
 
   return (
     <Flex
