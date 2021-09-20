@@ -2,7 +2,13 @@ import { Box, Input } from "@theme-ui/components";
 import React from "react";
 import theme from "../../shared/theme";
 
-const ShortBreakInput = () => {
+interface IProps {
+  value: number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+}
+
+const ShortBreakInput: React.FC<IProps> = ({ value, onChange, name }) => {
   return (
     <Box sx={{ width: theme.space[32] }}>
       <Box
@@ -16,7 +22,10 @@ const ShortBreakInput = () => {
         Short Break
       </Box>
       <Input
-        value={5}
+        value={value}
+        onChange={onChange}
+        name={name}
+        type="number"
         sx={{
           borderRadius: theme.space[34],
           background: theme.colors.greys[1],

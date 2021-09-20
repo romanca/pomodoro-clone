@@ -1,5 +1,8 @@
 import { ADD_POMODORO_TIME } from "./actionTypes";
 
-export const addPomodoroTime = (count: number) => {
-  return { type: ADD_POMODORO_TIME, payload: count };
+export const addPomodoroTime = (payload: TState) => {
+  return {
+    type: ADD_POMODORO_TIME,
+    payload,
+  };
 };

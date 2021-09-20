@@ -1,24 +1,14 @@
 import { Box, Input } from "@theme-ui/components";
 import React from "react";
 import theme from "../../shared/theme";
-import { useDispatch, useSelector } from "react-redux";
-import { addPomodoroTime } from "../../redux/actions/actions";
 
-const PomodoroInput = () => {
-  const counter = useSelector(
-    (state: RootState) => state.pomodoroCounter.count
-  );
-  const [countTime, setCountTime] = React.useState(counter);
-  const dispatch = useDispatch();
+interface IProps {
+  value: number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+}
 
-  React.useEffect(() => {
-    setCountTime(counter);
-  }, [counter]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCountTime(Number(e.target.value));
-  };
-
+const PomodoroInput: React.FC<IProps> = ({ value, onChange, name }) => {
   return (
     <Box sx={{ width: theme.space[32] }}>
       <Box
@@ -29,12 +19,13 @@ const PomodoroInput = () => {
           marginBottom: theme.space[34],
         }}
       >
-        Long Break
+        Pomodoro
       </Box>
       <Input
+        value={value}
+        onChange={onChange}
+        name={name}
         type="number"
-        value={countTime}
-        onChange={handleChange}
         sx={{
           borderRadius: theme.space[34],
           background: theme.colors.greys[1],
@@ -48,7 +39,6 @@ const PomodoroInput = () => {
           fontFamily: "ArialRoundedMTBold",
         }}
       />
-      {/* <button onClick={() => dispatch(addPomodoroTime(countTime))}>add</button> */}
     </Box>
   );
 };
