@@ -5,7 +5,12 @@ import LongBreakInput from "./longBreakInput";
 import PomodoroInput from "./pomodoroInput";
 import ShortBreakInput from "./shortBreakInput";
 
-const SettingsInputs = () => {
+interface IProps {
+  values: TState;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SettingsInputs: React.FC<IProps> = ({ values, onChange }) => {
   return (
     <Box
       sx={{
@@ -36,9 +41,13 @@ const SettingsInputs = () => {
           marginTop: theme.space[35],
         }}
       >
-        <PomodoroInput />
-        <ShortBreakInput />
-        <LongBreakInput />
+        <PomodoroInput value={values.count} onChange={onChange} name="count" />
+        <ShortBreakInput
+          value={values.short}
+          onChange={onChange}
+          name="short"
+        />
+        <LongBreakInput value={values.long} onChange={onChange} name="long" />
       </Box>
     </Box>
   );

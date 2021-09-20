@@ -3,10 +3,39 @@ import React from "react";
 import { useModal } from "../../Providers/ModalProvider";
 import theme from "../../shared/theme";
 import SettingsInputs from "./settingsInputs";
+import { useSelector, useDispatch } from "react-redux";
+import { addPomodoroTime } from "../../redux/actions/actions";
 
 const SettingsModalContent = () => {
+  const time = useSelector((state: RootState) => state.pomodoroCounter);
+  const [values, setValues] = React.useState(time);
+  const dispatch = useDispatch();
   const { closeModalDialog } = useModal();
   const ref = React.useRef<HTMLDivElement>(null);
+
+  const bootstrap = React.useCallback(() => {
+    setValues(time);
+  }, [time]);
+
+  React.useEffect(() => {
+    bootstrap();
+  }, [bootstrap]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: Number(value),
+    });
+  };
+
+  const handleSubmitTimes = React.useCallback(
+    (values: TState) => {
+      dispatch(addPomodoroTime(values));
+      closeModalDialog();
+    },
+    [closeModalDialog, dispatch]
+  );
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
@@ -14,9 +43,10 @@ const SettingsModalContent = () => {
 
       if (el instanceof Node && ref.current && !ref.current.contains(el)) {
         closeModalDialog();
+        handleSubmitTimes(values);
       }
     },
-    [closeModalDialog]
+    [closeModalDialog, handleSubmitTimes, values]
   );
 
   React.useEffect(() => {
@@ -48,7 +78,7 @@ const SettingsModalContent = () => {
           TIMER SETTING
         </Box>
         <Box
-          onClick={closeModalDialog}
+          onClick={() => handleSubmitTimes(values)}
           sx={{
             cursor: "pointer",
             fontSize: theme.space[37],
@@ -73,7 +103,7 @@ const SettingsModalContent = () => {
           </Box>
         </Box>
       </Flex>
-      <SettingsInputs />
+      <SettingsInputs values={values} onChange={handleInputChange} />
       <Box
         style={{
           padding: "14px 20px",
@@ -84,7 +114,7 @@ const SettingsModalContent = () => {
         }}
       >
         <Button
-          onClick={closeModalDialog}
+          onClick={() => handleSubmitTimes(values)}
           sx={{
             alignItems: "center",
             justifyContent: "center",
