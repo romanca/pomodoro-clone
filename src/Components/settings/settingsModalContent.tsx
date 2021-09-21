@@ -31,8 +31,11 @@ const SettingsModalContent = () => {
 
   const handleSubmitTimes = React.useCallback(
     (values: TState) => {
-      dispatch(addPomodoroTime(values));
-      closeModalDialog();
+      if (values.count === 0 || values.short === 0 || values.long === 0) {
+      } else {
+        dispatch(addPomodoroTime(values));
+        closeModalDialog();
+      }
     },
     [closeModalDialog, dispatch]
   );
