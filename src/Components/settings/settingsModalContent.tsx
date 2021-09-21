@@ -13,6 +13,11 @@ const SettingsModalContent = () => {
   const { closeModalDialog } = useModal();
   const ref = React.useRef<HTMLDivElement>(null);
 
+  const condition =
+    values.count === 0 || values.short === 0 || values.long === 0;
+
+  console.log(condition);
+
   const bootstrap = React.useCallback(() => {
     setValues(time);
   }, [time]);
@@ -31,8 +36,11 @@ const SettingsModalContent = () => {
 
   const handleSubmitTimes = React.useCallback(
     (values: TState) => {
-      dispatch(addPomodoroTime(values));
-      closeModalDialog();
+      if (values.count === 0 || values.short === 0 || values.long === 0) {
+      } else {
+        dispatch(addPomodoroTime(values));
+        closeModalDialog();
+      }
     },
     [closeModalDialog, dispatch]
   );
