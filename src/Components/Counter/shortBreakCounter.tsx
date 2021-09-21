@@ -4,13 +4,15 @@ import useCounter from "../../hooks/useCounter";
 import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 
 interface IProps {
   valueSelect: string;
   handleActive: () => void;
   isActive: boolean;
   handleStopCounter: () => void;
+  handleFalseACtive: () => void;
+  toggleContent: (content: string) => void;
 }
 
 const ShortBreakCounter: React.FC<IProps> = ({
@@ -18,9 +20,30 @@ const ShortBreakCounter: React.FC<IProps> = ({
   handleActive,
   isActive,
   handleStopCounter,
+  handleFalseACtive,
+  toggleContent,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
   const { seconds, startCounter, minutes } = useCounter(0, time.short);
+
+  const counter = () => {
+    return (
+      <Flex>
+        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
+        <Box>:</Box>
+        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
+      </Flex>
+    );
+  };
+
+  const conditionalHandler = () => {
+    if (minutes === 0 && seconds === 0) {
+      handleFalseACtive();
+      toggleContent("longBreakCounter");
+    } else {
+      return counter();
+    }
+  };
 
   return (
     <Flex
@@ -35,11 +58,12 @@ const ShortBreakCounter: React.FC<IProps> = ({
         flexDirection: "column",
       }}
     >
-      <Flex>
+      {conditionalHandler()}
+      {/* <Flex>
         <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
         <Box>:</Box>
         <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
-      </Flex>
+      </Flex> */}
       <CounterButton
         startCounter={startCounter}
         valueSelect={valueSelect}
