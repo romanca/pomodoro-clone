@@ -9,12 +9,6 @@ const useCounter = (initSeconds: number, initMinutes: number) => {
     setStart(!start);
   };
 
-  const resetCounter = () => {
-    setSeconds(5);
-    setMinutes(1);
-    setStart(false);
-  };
-
   React.useEffect(() => {
     setSeconds(initSeconds);
     setMinutes(initMinutes);
@@ -35,8 +29,8 @@ const useCounter = (initSeconds: number, initMinutes: number) => {
     if (start && minutes === 0 && seconds === 0) {
       clearInterval(interval);
       setStart(!start);
-      setSeconds(5);
-      setMinutes(1);
+      setSeconds(0);
+      setMinutes(0);
     }
     return () => clearInterval(interval);
   }, [start, seconds, minutes]);
