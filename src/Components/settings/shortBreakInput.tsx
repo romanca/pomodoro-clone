@@ -26,6 +26,7 @@ const ShortBreakInput: React.FC<IProps> = ({ value, onChange, name }) => {
         onChange={onChange}
         name={name}
         type="number"
+        min="0"
         sx={{
           borderRadius: theme.space[34],
           background: theme.colors.greys[1],
@@ -33,10 +34,12 @@ const ShortBreakInput: React.FC<IProps> = ({ value, onChange, name }) => {
           padding: theme.space[35],
           boxShadow: "none",
           border: "none",
+          outline: "none",
           color: theme.colors.greys[2],
           width: theme.space[8],
           boxSizing: "border-box",
           fontFamily: "ArialRoundedMTBold",
+          webkitTapHighlightColor: "transparent",
         }}
       />
     </Box>
