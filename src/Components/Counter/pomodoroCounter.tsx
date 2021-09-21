@@ -11,6 +11,8 @@ interface IProps {
   isActive: boolean;
   handleActive: () => void;
   handleStopCounter: () => void;
+  toggleContent: (content: string) => void;
+  handleFalseACtive: () => void;
 }
 
 const PomodoroCounter: React.FC<IProps> = ({
@@ -18,9 +20,30 @@ const PomodoroCounter: React.FC<IProps> = ({
   isActive,
   handleActive,
   handleStopCounter,
+  toggleContent,
+  handleFalseACtive,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
   const { seconds, minutes, startCounter } = useCounter(0, time.count);
+
+  const counter = () => {
+    return (
+      <Flex>
+        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
+        <Box>:</Box>
+        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
+      </Flex>
+    );
+  };
+
+  const conditionalHandler = () => {
+    if (minutes === 0 && seconds === 0) {
+      handleFalseACtive();
+      toggleContent("shortBreakCounter");
+    } else {
+      return counter();
+    }
+  };
 
   return (
     <Flex
@@ -35,11 +58,7 @@ const PomodoroCounter: React.FC<IProps> = ({
         flexDirection: "column",
       }}
     >
-      <Flex>
-        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
-        <Box>:</Box>
-        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
-      </Flex>
+      {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}
         valueSelect={valueSelect}

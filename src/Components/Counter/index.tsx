@@ -12,6 +12,15 @@ interface IProps {
 
 const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
   const [isActive, setIsActive] = React.useState<boolean>(false);
+
+  const handleActive = () => {
+    setIsActive((current) => !current);
+  };
+
+  const handleFalseACtive = () => {
+    setIsActive(false);
+  };
+
   const switchCounters = () => {
     if (valueSelect === "pomodoroCounter") {
       return (
@@ -20,6 +29,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           isActive={isActive}
           handleActive={handleActive}
           handleStopCounter={handleStopCounter}
+          toggleContent={toggleContent}
+          handleFalseACtive={handleFalseACtive}
         />
       );
     } else if (valueSelect === "shortBreakCounter") {
@@ -29,6 +40,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
           handleActive={handleActive}
           isActive={isActive}
           handleStopCounter={handleStopCounter}
+          toggleContent={toggleContent}
+          handleFalseACtive={handleFalseACtive}
         />
       );
     }
@@ -38,12 +51,10 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
         handleActive={handleActive}
         isActive={isActive}
         handleStopCounter={handleStopCounter}
+        toggleContent={toggleContent}
+        handleFalseACtive={handleFalseACtive}
       />
     );
-  };
-
-  const handleActive = () => {
-    setIsActive((current) => !current);
   };
 
   const getValueHandler = (value: string) => () => {
