@@ -51,7 +51,7 @@ const theme = {
   fontSizes: [13, 16, 18, 24, 28, 20, 22],
   fontWeights: [100, 200, 300, 400, 500, 600, 700, 800, 900, "bold"],
   lineHeights: [1.5, 1.8, 2, 2.5],
-  borderRadiuss: [4, 6, 3],
+  borderRadiuss: [4, 6, 3, 50],
   borders: [
     "1px solid", //0
     "2px solid", //1
@@ -60,13 +60,13 @@ const theme = {
     "8px solid", //4
     "10px solid", //5
   ],
-  opacities: [0, 1],
+  opacities: [0, 1, 0.9],
   radii: [0, 2, 4, 6, 8, 10, 12, 16, 0.9],
   colors: {
     info: "#1ecbe1",
     primary: "#1676e9",
     danger: ["#e72918", "rgb(219, 82, 77)", "rgba(182, 165, 166, 0.2)"],
-    success: "#6bc33c",
+    success: ["#6bc33c", "rgba(132, 199, 51, 0.8)"],
     warning: "#fff900",
     blacks: [
       "rgba(0,0,0)", //0
@@ -99,6 +99,7 @@ const theme = {
       "rgb(187, 187, 187)", //0
       "rgb(239, 239, 239)", //1
       "rgb(85, 85, 85)", //2
+      "rgb(34, 34, 34)", //3
     ],
   },
 };

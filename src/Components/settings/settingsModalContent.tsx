@@ -5,6 +5,7 @@ import theme from "../../shared/theme";
 import SettingsInputs from "./settingsInputs";
 import { useSelector, useDispatch } from "react-redux";
 import { addPomodoroTime } from "../../redux/actions/actions";
+import AutoBreakStart from "./autoBreakStart";
 
 const SettingsModalContent = () => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
@@ -107,31 +108,30 @@ const SettingsModalContent = () => {
         </Box>
       </Flex>
       <SettingsInputs values={values} onChange={handleInputChange} />
+      <AutoBreakStart />
       <Box
         style={{
-          padding: "14px 20px",
+          borderTop: `${theme.space[36]} solid ${theme.colors.danger[2]}`,
           textAlign: "right",
-          borderBottomLeftRadius: 8,
-          borderBottomRightRadius: 8,
-          backgroundColor: "rgb(239, 239, 239)",
+          width: theme.space[8],
         }}
       >
         <Button
           onClick={() => handleSubmitTimes(values)}
           sx={{
+            marginTop: theme.space[33],
+            marginBottom: theme.space[10],
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            borderRadius: 4,
+            borderRadius: theme.borderRadiuss[0],
             cursor: "pointer",
-            boxShadow: "rgb(0 0 0 / 20%) 0px 2px 2px",
             color: "white",
-            opacity: 0.9,
-            fontSize: 14,
-            padding: "8px 12px",
-            minWidth: 70,
-            backgroundColor: "rgb(34, 34, 34)",
-            border: "2px solid rgb(34, 34, 34)",
+            opacity: theme.opacities[2],
+            fontSize: theme.space[33],
+            minWidth: theme.space[11],
+            backgroundColor: theme.colors.greys[3],
+            border: `${theme.borders[1]} ${theme.colors.greys[3]}`,
             display: "inline-block",
           }}
         >
