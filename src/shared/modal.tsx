@@ -16,11 +16,8 @@ const ModalDialog: React.FC<IProps> = ({
     <PopPop
       open={visible}
       contentStyle={{
-        transition: "all 0.3s",
         borderRadius: theme.borderRadiuss[2],
         zIndex: theme.space[45],
-        position: "relative",
-        width: theme.space[46],
       }}
       closeModalDialog={closeModalDialog}
     >
