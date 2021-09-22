@@ -59,11 +59,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
       }}
     >
       {conditionalHandler()}
-      {/* <Flex>
-        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
-        <Box>:</Box>
-        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
-      </Flex> */}
+
       <CounterButton
         startCounter={startCounter}
         valueSelect={valueSelect}
