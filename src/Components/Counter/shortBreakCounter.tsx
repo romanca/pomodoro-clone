@@ -59,7 +59,6 @@ const ShortBreakCounter: React.FC<IProps> = ({
       }}
     >
       {conditionalHandler()}
-
       <CounterButton
         startCounter={startCounter}
         valueSelect={valueSelect}

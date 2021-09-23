@@ -26,8 +26,6 @@ const LongBreakCounter: React.FC<IProps> = ({
   const time = useSelector((state: RootState) => state.pomodoroCounter);
   const { seconds, startCounter, minutes } = useCounter(0, time.long);
 
-  console.log("🚀 ~ file: longBreakCounter.tsx ~ line 17 ~ isActive", isActive);
-
   const counter = () => {
     return (
       <Flex>
@@ -61,7 +59,6 @@ const LongBreakCounter: React.FC<IProps> = ({
       }}
     >
       {conditionalHandler()}
-
       <CounterButton
         startCounter={startCounter}
         valueSelect={valueSelect}
