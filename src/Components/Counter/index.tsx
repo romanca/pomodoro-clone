@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Box, Button, Flex } from "theme-ui";
 import theme from "../../shared/theme";
 import LongBreakCounter from "./longBreakCounter";
@@ -12,6 +13,9 @@ interface IProps {
 
 const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
   const [isActive, setIsActive] = React.useState<boolean>(false);
+  const autoBreakSwitch = useSelector(
+    (state: RootState) => state.pomodoroCounter.autoBreak
+  );
 
   const handleActive = () => {
     setIsActive((current) => !current);
@@ -21,27 +25,32 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
     setIsActive(false);
   };
 
+  const handleActiveTrue = () => {
+    setIsActive(true);
+  };
+
   const switchCounters = () => {
     if (valueSelect === "pomodoroCounter") {
       return (
         <PomodoroCounter
           valueSelect={valueSelect}
           isActive={isActive}
-          handleActive={handleActive}
           handleStopCounter={handleStopCounter}
           toggleContent={toggleContent}
           handleFalseACtive={handleFalseACtive}
+          handleActiveTrue={handleActiveTrue}
         />
       );
     } else if (valueSelect === "shortBreakCounter") {
       return (
         <ShortBreakCounter
           valueSelect={valueSelect}
-          handleActive={handleActive}
           isActive={isActive}
           handleStopCounter={handleStopCounter}
           toggleContent={toggleContent}
           handleFalseACtive={handleFalseACtive}
+          autoBreakSwitch={autoBreakSwitch}
+          handleActiveTrue={handleActiveTrue}
         />
       );
     }
@@ -53,6 +62,7 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
         handleStopCounter={handleStopCounter}
         toggleContent={toggleContent}
         handleFalseACtive={handleFalseACtive}
+        handleActiveTrue={handleActiveTrue}
       />
     );
   };
@@ -64,7 +74,7 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
       );
       if (alertMessage) {
         toggleContent(value);
-        handleActive();
+        handleFalseACtive();
       }
     } else {
       toggleContent(value);

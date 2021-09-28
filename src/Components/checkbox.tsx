@@ -1,33 +1,27 @@
-import { Box, Flex } from "@theme-ui/components";
+import { Switch } from "@theme-ui/components";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AUTO_BREAK } from "../redux/actions/actionTypes";
 import theme from "../shared/theme";
 
-const Checkbox = () => {
+const CheckboxInput = () => {
+  const autoSwitch = useSelector(
+    (state: RootState) => state.pomodoroCounter.autoBreak
+  );
+  const dispatch = useDispatch();
+
   return (
-    <Flex
+    <Switch
+      checked={autoSwitch}
+      onChange={() => dispatch({ type: AUTO_BREAK })}
       sx={{
         cursor: "pointer",
-        width: theme.space[5],
-        height: theme.space[4],
-        borderRadius: theme.borderRadiuss[3],
-        position: "relative",
-        alignItems: "center",
-        background: theme.colors.success[1],
+        background: autoSwitch
+          ? theme.colors.success[1]
+          : theme.colors.greys[4],
       }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          // left: "2px",
-          right: theme.space[19],
-          width: theme.space[21],
-          height: theme.space[21],
-          borderRadius: theme.borderRadiuss[3],
-          background: "white",
-        }}
-      ></Box>
-    </Flex>
+    />
   );
 };
 
-export default Checkbox;
+export default CheckboxInput;

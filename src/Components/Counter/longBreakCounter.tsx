@@ -13,6 +13,7 @@ interface IProps {
   handleStopCounter: () => void;
   handleFalseACtive: () => void;
   toggleContent: (content: string) => void;
+  handleActiveTrue: () => void;
 }
 
 const LongBreakCounter: React.FC<IProps> = ({
@@ -22,9 +23,13 @@ const LongBreakCounter: React.FC<IProps> = ({
   handleStopCounter,
   handleFalseACtive,
   toggleContent,
+  handleActiveTrue,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
-  const { seconds, startCounter, minutes } = useCounter(0, time.long);
+  const { seconds, startCounter, minutes, stopCounter } = useCounter(
+    0,
+    time.long
+  );
 
   const counter = () => {
     return (
@@ -63,7 +68,8 @@ const LongBreakCounter: React.FC<IProps> = ({
         startCounter={startCounter}
         valueSelect={valueSelect}
         isActive={isActive}
-        handleActive={handleActive}
+        stopCounter={stopCounter}
+        handleActiveTrue={handleActiveTrue}
       />
       <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
     </Flex>
