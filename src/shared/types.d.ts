@@ -2,6 +2,7 @@ interface TState {
   count: number;
   short: number;
   long: number;
+  autoBreak: boolean;
 }
 
 type Action = {

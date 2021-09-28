@@ -8,23 +8,29 @@ import { useSelector } from "react-redux";
 
 interface IProps {
   valueSelect: string;
-  handleActive: () => void;
   isActive: boolean;
   handleStopCounter: () => void;
   handleFalseACtive: () => void;
   toggleContent: (content: string) => void;
+  handleActiveTrue: () => void;
+  autoBreakSwitch: boolean;
 }
 
 const ShortBreakCounter: React.FC<IProps> = ({
   valueSelect,
-  handleActive,
   isActive,
   handleStopCounter,
   handleFalseACtive,
   toggleContent,
+  handleActiveTrue,
+  autoBreakSwitch,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
-  const { seconds, startCounter, minutes } = useCounter(0, time.short);
+  const { seconds, startCounter, minutes, stopCounter } = useCounter(
+    0,
+    time.short
+  );
+  
 
   const counter = () => {
     return (
@@ -37,12 +43,24 @@ const ShortBreakCounter: React.FC<IProps> = ({
   };
 
   const conditionalHandler = () => {
-    if (minutes === 0 && seconds === 0) {
-      handleFalseACtive();
-      toggleContent("longBreakCounter");
+    if (autoBreakSwitch) {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        toggleContent("longBreakCounter");
+      }
+      if (minutes !== 0 && seconds === 0) {
+        setTimeout(() => {
+          handleActiveTrue();
+          startCounter();
+        }, 1000);
+      }
     } else {
-      return counter();
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        toggleContent("longBreakCounter");
+      }
     }
+    return counter();
   };
 
   return (
@@ -59,12 +77,13 @@ const ShortBreakCounter: React.FC<IProps> = ({
       }}
     >
       {conditionalHandler()}
-
       <CounterButton
         startCounter={startCounter}
+        stopCounter={stopCounter}
         valueSelect={valueSelect}
         isActive={isActive}
-        handleActive={handleActive}
+        handleFalseACtive={handleFalseACtive}
+        handleActiveTrue={handleActiveTrue}
       />
       <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
     </Flex>

@@ -1,19 +1,23 @@
-import { Button } from "@theme-ui/components";
+import { Button, Flex } from "@theme-ui/components";
 import React from "react";
 import theme from "../../shared/theme";
 
 interface IProps {
   valueSelect: string;
-  startCounter: any;
+  startCounter: () => void;
   isActive: boolean;
-  handleActive: () => void;
+  stopCounter: () => void;
+  handleFalseACtive?: () => void;
+  handleActiveTrue: () => void;
 }
 
 const CounterButton: React.FC<IProps> = ({
   valueSelect,
   startCounter,
   isActive,
-  handleActive,
+  stopCounter,
+  handleFalseACtive,
+  handleActiveTrue,
 }) => {
   const switchColors =
     valueSelect === "pomodoroCounter"
@@ -26,29 +30,63 @@ const CounterButton: React.FC<IProps> = ({
 
   const handleStartCounter = () => {
     startCounter();
-    handleActive();
+    handleActiveTrue();
+  };
+
+  const handleStopCounter = () => {
+    handleFalseACtive && handleFalseACtive();
+    stopCounter();
   };
 
   return (
-    <Button
-      onClick={handleStartCounter}
+    <Flex
       sx={{
-        cursor: "pointer",
-        border: "none",
-        outline: "none",
-        marginTop: theme.space[16],
-        borderRadius: theme.fontSizes[0],
-        fontFamily: "ArialRoundedMTBold",
-        fontSize: theme.fontSizes[6],
-        height: theme.space[22],
-        color: switchColors,
-        fontWeight: theme.fontWeights[9],
-        width: theme.space[23],
-        backgroundColor: theme.colors.whites[8],
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      {isActive ? "STOP" : "START"}
-    </Button>
+      {!isActive ? (
+        <Button
+          onClick={handleStartCounter}
+          sx={{
+            cursor: "pointer",
+            border: "none",
+            outline: "none",
+            marginTop: theme.space[16],
+            borderRadius: theme.fontSizes[0],
+            fontFamily: "ArialRoundedMTBold",
+            fontSize: theme.fontSizes[6],
+            height: theme.space[22],
+            color: switchColors,
+            fontWeight: theme.fontWeights[9],
+            width: theme.space[23],
+            backgroundColor: theme.colors.whites[8],
+          }}
+        >
+          START
+        </Button>
+      ) : (
+        <Button
+          onClick={handleStopCounter}
+          sx={{
+            cursor: "pointer",
+            border: "none",
+            outline: "none",
+            marginTop: theme.space[16],
+            borderRadius: theme.fontSizes[0],
+            fontFamily: "ArialRoundedMTBold",
+            fontSize: theme.fontSizes[6],
+            height: theme.space[22],
+            color: switchColors,
+            fontWeight: theme.fontWeights[9],
+            width: theme.space[23],
+            backgroundColor: theme.colors.whites[8],
+          }}
+        >
+          STOP
+        </Button>
+      )}
+    </Flex>
   );
 };
 
