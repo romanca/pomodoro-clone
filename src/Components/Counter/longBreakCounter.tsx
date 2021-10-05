@@ -4,32 +4,30 @@ import useCounter from "../../hooks/useCounter";
 import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
-  valueSelect: string;
-  handleActive: () => void;
   isActive: boolean;
   handleStopCounter: () => void;
   handleFalseACtive: () => void;
-  toggleContent: (content: string) => void;
   handleActiveTrue: () => void;
+  autoBreakSwitch: boolean;
 }
 
-const LongBreakCounter: React.FC<IProps> = ({
-  valueSelect,
-  handleActive,
+const ShortBreakCounter: React.FC<IProps> = ({
   isActive,
   handleStopCounter,
   handleFalseACtive,
-  toggleContent,
   handleActiveTrue,
+  autoBreakSwitch,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
   const { seconds, startCounter, minutes, stopCounter } = useCounter(
     0,
     time.long
   );
+  const dispatch = useDispatch();
 
   const counter = () => {
     return (
@@ -42,12 +40,24 @@ const LongBreakCounter: React.FC<IProps> = ({
   };
 
   const conditionalHandler = () => {
-    if (minutes === 0 && seconds === 0) {
-      handleFalseACtive();
-      toggleContent("pomodoroCounter");
+    if (autoBreakSwitch) {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter("pomodoroCounter"));
+      }
+      if (minutes !== 0 && seconds === 0) {
+        setTimeout(() => {
+          handleActiveTrue();
+          startCounter();
+        }, 1000);
+      }
     } else {
-      return counter();
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter("pomodoroCounter"));
+      }
     }
+    return counter();
   };
 
   return (
@@ -61,14 +71,15 @@ const LongBreakCounter: React.FC<IProps> = ({
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
+        position: "relative",
       }}
     >
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}
-        valueSelect={valueSelect}
-        isActive={isActive}
         stopCounter={stopCounter}
+        isActive={isActive}
+        handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
       />
       <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
@@ -76,4 +87,4 @@ const LongBreakCounter: React.FC<IProps> = ({
   );
 };
 
-export default LongBreakCounter;
+export default ShortBreakCounter;

@@ -1,9 +1,9 @@
 import { Button, Flex } from "@theme-ui/components";
 import React from "react";
+import { useSelector } from "react-redux";
 import theme from "../../shared/theme";
 
 interface IProps {
-  valueSelect: string;
   startCounter: () => void;
   isActive: boolean;
   stopCounter: () => void;
@@ -12,13 +12,15 @@ interface IProps {
 }
 
 const CounterButton: React.FC<IProps> = ({
-  valueSelect,
   startCounter,
   isActive,
   stopCounter,
   handleFalseACtive,
   handleActiveTrue,
 }) => {
+  const valueSelect = useSelector(
+    (state: RootState) => state.pomodoroCounter.counter
+  );
   const switchColors =
     valueSelect === "pomodoroCounter"
       ? theme.colors.danger[1]

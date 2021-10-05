@@ -1,3 +1,3 @@
 export const ADD_POMODORO_TIME = "ADD_POMODORO_TIME";
-export const AUTO_BREAK = "AUTO_BREAK"
- 
+export const AUTO_BREAK = "AUTO_BREAK";
+export const SWITCH_COUNTER = "SWITCH_COUNTER";

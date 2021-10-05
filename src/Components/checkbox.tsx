@@ -9,6 +9,7 @@ const CheckboxInput = () => {
     (state: RootState) => state.pomodoroCounter.autoBreak
   );
   const dispatch = useDispatch();
+ 
 
   const handleChange = () => {
     dispatch({ type: AUTO_BREAK });

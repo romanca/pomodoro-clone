@@ -4,26 +4,24 @@ import useCounter from "../../hooks/useCounter";
 import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
-  valueSelect: string;
   isActive: boolean;
   handleStopCounter: () => void;
-  toggleContent: (content: string) => void;
   handleFalseACtive: () => void;
   handleActiveTrue: () => void;
 }
 
 const PomodoroCounter: React.FC<IProps> = ({
-  valueSelect,
   isActive,
   handleStopCounter,
-  toggleContent,
   handleFalseACtive,
   handleActiveTrue,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
+  const dispatch = useDispatch();
   const { seconds, minutes, startCounter, stopCounter } = useCounter(
     0,
     time.count
@@ -45,7 +43,7 @@ const PomodoroCounter: React.FC<IProps> = ({
         stopCounter();
         handleFalseACtive();
       });
-      toggleContent("shortBreakCounter");
+      dispatch(switchCounter("shortBreakCounter"));
     } else {
       return counter();
     }
@@ -62,13 +60,13 @@ const PomodoroCounter: React.FC<IProps> = ({
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
+        position: "relative",
       }}
     >
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}
         stopCounter={stopCounter}
-        valueSelect={valueSelect}
         isActive={isActive}
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}

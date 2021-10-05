@@ -27,6 +27,8 @@ const ArrowButton: React.FC<IProps> = ({ isActive, handleStopCounter }) => {
             right: theme.space[26],
             top: theme.space[27],
             background: "transparent",
+            marginTop: -175,
+            marginRight: -490,
           }}
         >
           <Icon name="rightArrow" />
