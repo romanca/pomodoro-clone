@@ -9,11 +9,16 @@ const CheckboxInput = () => {
     (state: RootState) => state.pomodoroCounter.autoBreak
   );
   const dispatch = useDispatch();
+ 
+
+  const handleChange = () => {
+    dispatch({ type: AUTO_BREAK });
+  };
 
   return (
     <Switch
       checked={autoSwitch}
-      onChange={() => dispatch({ type: AUTO_BREAK })}
+      onChange={handleChange}
       sx={{
         cursor: "pointer",
         background: autoSwitch

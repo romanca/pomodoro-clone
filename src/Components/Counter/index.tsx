@@ -1,20 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Box, Button, Flex } from "theme-ui";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Flex } from "theme-ui";
+import { switchCounter } from "../../redux/actions/actions";
 import theme from "../../shared/theme";
+import SwitchValueButton from "../switchValueButton";
 import LongBreakCounter from "./longBreakCounter";
 import PomodoroCounter from "./pomodoroCounter";
 import ShortBreakCounter from "./shortBreakCounter";
 
-interface IProps {
-  valueSelect: string;
-  toggleContent: (content: string) => void;
-}
-
-const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
+const Counter = () => {
   const [isActive, setIsActive] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
   const autoBreakSwitch = useSelector(
     (state: RootState) => state.pomodoroCounter.autoBreak
+  );
+  const valueSelect = useSelector(
+    (state: RootState) => state.pomodoroCounter.counter
   );
 
   const handleActive = () => {
@@ -33,10 +34,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
     if (valueSelect === "pomodoroCounter") {
       return (
         <PomodoroCounter
-          valueSelect={valueSelect}
           isActive={isActive}
           handleStopCounter={handleStopCounter}
-          toggleContent={toggleContent}
           handleFalseACtive={handleFalseACtive}
           handleActiveTrue={handleActiveTrue}
         />
@@ -44,10 +43,8 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
     } else if (valueSelect === "shortBreakCounter") {
       return (
         <ShortBreakCounter
-          valueSelect={valueSelect}
           isActive={isActive}
           handleStopCounter={handleStopCounter}
-          toggleContent={toggleContent}
           handleFalseACtive={handleFalseACtive}
           autoBreakSwitch={autoBreakSwitch}
           handleActiveTrue={handleActiveTrue}
@@ -56,13 +53,11 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
     }
     return (
       <LongBreakCounter
-        valueSelect={valueSelect}
-        handleActive={handleActive}
         isActive={isActive}
         handleStopCounter={handleStopCounter}
-        toggleContent={toggleContent}
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
+        autoBreakSwitch={autoBreakSwitch}
       />
     );
   };
@@ -73,11 +68,11 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
         "The timer is still running, are you sure you want to switch?"
       );
       if (alertMessage) {
-        toggleContent(value);
+        dispatch(switchCounter(value));
         handleFalseACtive();
       }
     } else {
-      toggleContent(value);
+      dispatch(switchCounter(value));
     }
   };
 
@@ -87,10 +82,10 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
         "Are you sure you wanto stop the counter?"
       );
       if (alertMessage && valueSelect === "pomodoroCounter") {
-        toggleContent("shortBreakCounter");
+        dispatch(switchCounter("shortBreakCounter"));
         handleActive();
       } else {
-        toggleContent("pomodoroCounter");
+        dispatch(switchCounter("pomodoroCounter"));
         handleActive();
       }
     }
@@ -120,75 +115,18 @@ const Counter: React.FC<IProps> = ({ valueSelect, toggleContent }) => {
             alignItems: "center",
           }}
         >
-          <Button
+          <SwitchValueButton
             onClick={getValueHandler("pomodoroCounter")}
-            sx={{
-              border: "none",
-              outline: "none",
-              borderRadius: theme.borderRadiuss[0],
-              fontFamily: "ArialRoundedMTBold",
-              fontSize: theme.fontSizes[1],
-              height: theme.space[21],
-              cursor: "pointer",
-              background:
-                valueSelect === "pomodoroCounter"
-                  ? theme.colors.blacks[11]
-                  : "transparent",
-              color: theme.colors.whites[8],
-              opacity: theme.opacities[1],
-              fontWeight: theme.fontWeights[9],
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Pomodoro
-          </Button>
-          <Button
+            title={"Pomodoro"}
+          />
+          <SwitchValueButton
             onClick={getValueHandler("shortBreakCounter")}
-            sx={{
-              border: "none",
-              color: theme.colors.whites[8],
-              borderRadius: theme.borderRadiuss[0],
-              fontFamily: "ArialRoundedMTBold",
-              fontSize: theme.fontSizes[1],
-              height: theme.space[21],
-              cursor: "pointer",
-              fontWeight: theme.fontWeights[9],
-              background:
-                valueSelect === "shortBreakCounter"
-                  ? theme.colors.blacks[11]
-                  : "transparent",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Short Break
-          </Button>
-          <Button
+            title={"Short Break"}
+          />
+          <SwitchValueButton
             onClick={getValueHandler("longBreakCounter")}
-            sx={{
-              border: "none",
-              outline: "none",
-              color: theme.colors.whites[8],
-              borderRadius: theme.borderRadiuss[0],
-              fontFamily: "ArialRoundedMTBold",
-              fontSize: theme.fontSizes[1],
-              height: theme.space[21],
-              cursor: "pointer",
-              background:
-                valueSelect === "longBreakCounter"
-                  ? theme.colors.blacks[11]
-                  : "transparent",
-              fontWeight: theme.fontWeights[9],
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Long Break
-          </Button>
+            title={"Long Break"}
+          />
         </Flex>
         {switchCounters()}
       </Box>

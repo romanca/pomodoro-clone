@@ -4,24 +4,21 @@ import useCounter from "../../hooks/useCounter";
 import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
-  valueSelect: string;
   isActive: boolean;
   handleStopCounter: () => void;
   handleFalseACtive: () => void;
-  toggleContent: (content: string) => void;
   handleActiveTrue: () => void;
   autoBreakSwitch: boolean;
 }
 
 const ShortBreakCounter: React.FC<IProps> = ({
-  valueSelect,
   isActive,
   handleStopCounter,
   handleFalseACtive,
-  toggleContent,
   handleActiveTrue,
   autoBreakSwitch,
 }) => {
@@ -30,7 +27,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
     0,
     time.short
   );
-  
+  const dispatch = useDispatch();
 
   const counter = () => {
     return (
@@ -46,7 +43,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
     if (autoBreakSwitch) {
       if (minutes === 0 && seconds === 0) {
         handleFalseACtive();
-        toggleContent("longBreakCounter");
+        dispatch(switchCounter("longBreakCounter"));
       }
       if (minutes !== 0 && seconds === 0) {
         setTimeout(() => {
@@ -57,7 +54,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
     } else {
       if (minutes === 0 && seconds === 0) {
         handleFalseACtive();
-        toggleContent("longBreakCounter");
+        dispatch(switchCounter("longBreakCounter"));
       }
     }
     return counter();
@@ -74,13 +71,13 @@ const ShortBreakCounter: React.FC<IProps> = ({
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
+        position: "relative",
       }}
     >
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}
         stopCounter={stopCounter}
-        valueSelect={valueSelect}
         isActive={isActive}
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}

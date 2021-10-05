@@ -1,10 +1,13 @@
-import { Flex } from "theme-ui";
-import useToggleContent from "../hooks/useToggleContent";
+import { useSelector } from "react-redux";
+import { Flex, Box } from "theme-ui";
 import theme from "../shared/theme";
-import LayoutContent from "./layoutContent";
+import Counter from "./Counter";
+import Header from "./header";
 
 const Layout = () => {
-  const { valueSelect, toggleContent } = useToggleContent();
+  const valueSelect = useSelector(
+    (state: RootState) => state.pomodoroCounter.counter
+  );
 
   const switchColors =
     valueSelect === "pomodoroCounter"
@@ -24,7 +27,28 @@ const Layout = () => {
         background: switchColors,
       }}
     >
-      <LayoutContent valueSelect={valueSelect} toggleContent={toggleContent} />
+      <Box
+        style={{
+          width: theme.space[13],
+        }}
+      >
+        <Header />
+        <Box
+          sx={{
+            margin: "auto",
+            borderTop: `${theme.borders[0]} solid ${theme.colors.blacks[12]}`,
+          }}
+        >
+          <Box
+            sx={{
+              textAlign: "center",
+              width: theme.space[8],
+            }}
+          >
+            <Counter />
+          </Box>
+        </Box>
+      </Box>
     </Flex>
   );
 };

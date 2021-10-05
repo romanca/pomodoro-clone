@@ -1,4 +1,4 @@
-import { ADD_POMODORO_TIME, AUTO_BREAK } from "./actionTypes";
+import { ADD_POMODORO_TIME, AUTO_BREAK, SWITCH_COUNTER } from "./actionTypes";
 
 export const addPomodoroTime = (payload: TState) => {
   return {
@@ -9,4 +9,11 @@ export const addPomodoroTime = (payload: TState) => {
 
 export const autoBreak = () => {
   return { type: AUTO_BREAK };
+};
+
+export const switchCounter = (payload: string) => {
+  return {
+    type: SWITCH_COUNTER,
+    payload,
+  };
 };

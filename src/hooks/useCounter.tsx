@@ -3,7 +3,7 @@ import React from "react";
 const useCounter = (initSeconds: number, initMinutes: number) => {
   const [seconds, setSeconds] = React.useState(initSeconds);
   const [minutes, setMinutes] = React.useState(initMinutes);
-  const [start, setStart] = React.useState<boolean>(false);
+  const [start, setStart] = React.useState(false);
 
   const startCounter = () => {
     setStart(true);
