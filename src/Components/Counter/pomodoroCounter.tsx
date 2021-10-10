@@ -30,10 +30,6 @@ const PomodoroCounter: React.FC<IProps> = ({
     (state: RootState) => state.pomodoroCounter.data
   );
 
-  const selectedCounter = useSelector(
-    (state: RootState) => state.pomodoroCounter.selectedCounter
-  );
-
   const conditionalHandler = () => {
     if (minutes === 0 && seconds === 55) {
       setTimeout(() => {
