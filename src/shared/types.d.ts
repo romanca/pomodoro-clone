@@ -4,13 +4,19 @@ interface TState {
   long: number;
   autoBreak: boolean;
   counter: string;
+  selectedCounter: string;
+  data: TCounter[];
 }
-
-type TValue = "pomodoroCounter" | "shortBreakCounter" | "longBreakCounter";
 
 type Action = {
   type: typeof ADD_POMODORO_TIME;
   payload: number;
 };
+
+interface TCounter {
+  title: string;
+  value: string;
+  id: number;
+}
 
 type RootState = ReturnType<typeof rootReducer>;

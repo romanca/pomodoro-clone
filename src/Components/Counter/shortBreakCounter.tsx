@@ -5,7 +5,7 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { switchCounter } from "../../redux/actions/actions";
+import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
   isActive: boolean;
@@ -28,8 +28,30 @@ const ShortBreakCounter: React.FC<IProps> = ({
     time.short
   );
   const dispatch = useDispatch();
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
+  );
 
-  const counter = () => {
+  const conditionalHandler = () => {
+    if (autoBreakSwitch) {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter(rawCounterData[2].value));
+        dispatch(setSelectedCounter(rawCounterData[2].value));
+      }
+      if (minutes !== 0 && seconds === 0) {
+        setTimeout(() => {
+          handleActiveTrue();
+          startCounter();
+        }, 100);
+      }
+    } else {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter(rawCounterData[2].value));
+        dispatch(setSelectedCounter(rawCounterData[2].value));
+      }
+    }
     return (
       <Flex>
         <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
@@ -37,27 +59,6 @@ const ShortBreakCounter: React.FC<IProps> = ({
         <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
       </Flex>
     );
-  };
-
-  const conditionalHandler = () => {
-    if (autoBreakSwitch) {
-      if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter("longBreakCounter"));
-      }
-      if (minutes !== 0 && seconds === 0) {
-        setTimeout(() => {
-          handleActiveTrue();
-          startCounter();
-        }, 1000);
-      }
-    } else {
-      if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter("longBreakCounter"));
-      }
-    }
-    return counter();
   };
 
   return (

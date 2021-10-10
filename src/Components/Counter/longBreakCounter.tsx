@@ -5,19 +5,19 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { switchCounter } from "../../redux/actions/actions";
+import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
   isActive: boolean;
-  handleStopCounter: () => void;
+  // handleStopCounter: () => void;
   handleFalseACtive: () => void;
   handleActiveTrue: () => void;
   autoBreakSwitch: boolean;
 }
 
-const ShortBreakCounter: React.FC<IProps> = ({
+const LongBreakCounter: React.FC<IProps> = ({
   isActive,
-  handleStopCounter,
+  // handleStopCounter,
   handleFalseACtive,
   handleActiveTrue,
   autoBreakSwitch,
@@ -27,9 +27,31 @@ const ShortBreakCounter: React.FC<IProps> = ({
     0,
     time.long
   );
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
+  );
   const dispatch = useDispatch();
 
-  const counter = () => {
+  const conditionalHandler = () => {
+    if (autoBreakSwitch) {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter(rawCounterData[0].value));
+        dispatch(setSelectedCounter(rawCounterData[0].value));
+      }
+      if (minutes !== 0 && seconds === 0) {
+        setTimeout(() => {
+          handleActiveTrue();
+          startCounter();
+        });
+      }
+    } else {
+      if (minutes === 0 && seconds === 0) {
+        handleFalseACtive();
+        dispatch(switchCounter(rawCounterData[0].value));
+        dispatch(setSelectedCounter(rawCounterData[0].value));
+      }
+    }
     return (
       <Flex>
         <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
@@ -37,27 +59,6 @@ const ShortBreakCounter: React.FC<IProps> = ({
         <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
       </Flex>
     );
-  };
-
-  const conditionalHandler = () => {
-    if (autoBreakSwitch) {
-      if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter("pomodoroCounter"));
-      }
-      if (minutes !== 0 && seconds === 0) {
-        setTimeout(() => {
-          handleActiveTrue();
-          startCounter();
-        }, 1000);
-      }
-    } else {
-      if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter("pomodoroCounter"));
-      }
-    }
-    return counter();
   };
 
   return (
@@ -82,9 +83,12 @@ const ShortBreakCounter: React.FC<IProps> = ({
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
       />
-      <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
+      <ArrowButton
+        isActive={isActive}
+        // handleStopCounter={handleStopCounter}
+      />
     </Flex>
   );
 };
 
-export default ShortBreakCounter;
+export default LongBreakCounter;

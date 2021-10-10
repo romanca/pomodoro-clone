@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex } from "theme-ui";
-import { switchCounter } from "../../redux/actions/actions";
+import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
 import theme from "../../shared/theme";
 import SwitchValueButton from "../switchValueButton";
 import LongBreakCounter from "./longBreakCounter";
@@ -9,13 +9,19 @@ import PomodoroCounter from "./pomodoroCounter";
 import ShortBreakCounter from "./shortBreakCounter";
 
 const Counter = () => {
-  const [isActive, setIsActive] = React.useState<boolean>(false);
+  const [isActive, setIsActive] = React.useState(false);
   const dispatch = useDispatch();
   const autoBreakSwitch = useSelector(
     (state: RootState) => state.pomodoroCounter.autoBreak
   );
   const valueSelect = useSelector(
     (state: RootState) => state.pomodoroCounter.counter
+  );
+  const selectedCounter = useSelector(
+    (state: RootState) => state.pomodoroCounter.selectedCounter
+  );
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
   );
 
   const handleActive = () => {
@@ -31,7 +37,7 @@ const Counter = () => {
   };
 
   const switchCounters = () => {
-    if (valueSelect === "pomodoroCounter") {
+    if (valueSelect === rawCounterData[0].value) {
       return (
         <PomodoroCounter
           isActive={isActive}
@@ -40,7 +46,7 @@ const Counter = () => {
           handleActiveTrue={handleActiveTrue}
         />
       );
-    } else if (valueSelect === "shortBreakCounter") {
+    } else if (valueSelect === rawCounterData[1].value) {
       return (
         <ShortBreakCounter
           isActive={isActive}
@@ -54,7 +60,7 @@ const Counter = () => {
     return (
       <LongBreakCounter
         isActive={isActive}
-        handleStopCounter={handleStopCounter}
+        // handleStopCounter={handleStopCounter}
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
         autoBreakSwitch={autoBreakSwitch}
@@ -69,10 +75,12 @@ const Counter = () => {
       );
       if (alertMessage) {
         dispatch(switchCounter(value));
+        dispatch(setSelectedCounter(value));
         handleFalseACtive();
       }
     } else {
       dispatch(switchCounter(value));
+      dispatch(setSelectedCounter(value));
     }
   };
 
@@ -81,11 +89,13 @@ const Counter = () => {
       const alertMessage = window.confirm(
         "Are you sure you wanto stop the counter?"
       );
-      if (alertMessage && valueSelect === "pomodoroCounter") {
-        dispatch(switchCounter("shortBreakCounter"));
+      if (alertMessage && valueSelect === rawCounterData[0].value) {
+        dispatch(switchCounter(rawCounterData[1].value));
+        dispatch(setSelectedCounter(rawCounterData[1].value));
         handleActive();
       } else {
-        dispatch(switchCounter("pomodoroCounter"));
+        dispatch(switchCounter(rawCounterData[0].value));
+        dispatch(setSelectedCounter(rawCounterData[0].value));
         handleActive();
       }
     }
@@ -115,18 +125,14 @@ const Counter = () => {
             alignItems: "center",
           }}
         >
-          <SwitchValueButton
-            onClick={getValueHandler("pomodoroCounter")}
-            title={"Pomodoro"}
-          />
-          <SwitchValueButton
-            onClick={getValueHandler("shortBreakCounter")}
-            title={"Short Break"}
-          />
-          <SwitchValueButton
-            onClick={getValueHandler("longBreakCounter")}
-            title={"Long Break"}
-          />
+          {rawCounterData.map((item: TCounter) => (
+            <SwitchValueButton
+              key={item.id}
+              title={item.title}
+              selected={item.value === selectedCounter}
+              onClick={getValueHandler(item.value)}
+            />
+          ))}
         </Flex>
         {switchCounters()}
       </Box>

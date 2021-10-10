@@ -21,13 +21,17 @@ const CounterButton: React.FC<IProps> = ({
   const valueSelect = useSelector(
     (state: RootState) => state.pomodoroCounter.counter
   );
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
+  );
+
   const switchColors =
-    valueSelect === "pomodoroCounter"
+    valueSelect === rawCounterData[0].value
       ? theme.colors.danger[1]
-      : valueSelect === "shortBreakCounter"
-      ? "rgb(70, 142, 145)"
-      : valueSelect === "longBreakCounter"
-      ? "rgb(67, 126, 168)"
+      : valueSelect === rawCounterData[1].value
+      ? theme.colors.success[2]
+      : valueSelect === rawCounterData[2].value
+      ? theme.colors.primary[1]
       : theme.colors.danger[1];
 
   const handleStartCounter = () => {
@@ -47,47 +51,25 @@ const CounterButton: React.FC<IProps> = ({
         justifyContent: "center",
       }}
     >
-      {!isActive ? (
-        <Button
-          onClick={handleStartCounter}
-          sx={{
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            marginTop: theme.space[16],
-            borderRadius: theme.fontSizes[0],
-            fontFamily: "ArialRoundedMTBold",
-            fontSize: theme.fontSizes[6],
-            height: theme.space[22],
-            color: switchColors,
-            fontWeight: theme.fontWeights[9],
-            width: theme.space[23],
-            backgroundColor: theme.colors.whites[8],
-          }}
-        >
-          START
-        </Button>
-      ) : (
-        <Button
-          onClick={handleStopCounter}
-          sx={{
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            marginTop: theme.space[16],
-            borderRadius: theme.fontSizes[0],
-            fontFamily: "ArialRoundedMTBold",
-            fontSize: theme.fontSizes[6],
-            height: theme.space[22],
-            color: switchColors,
-            fontWeight: theme.fontWeights[9],
-            width: theme.space[23],
-            backgroundColor: theme.colors.whites[8],
-          }}
-        >
-          STOP
-        </Button>
-      )}
+      <Button
+        onClick={!isActive ? handleStartCounter : handleStopCounter}
+        sx={{
+          cursor: "pointer",
+          border: "none",
+          outline: "none",
+          marginTop: theme.space[16],
+          borderRadius: theme.fontSizes[0],
+          fontFamily: "ArialRoundedMTBold",
+          fontSize: theme.fontSizes[6],
+          height: theme.space[22],
+          color: switchColors,
+          fontWeight: theme.fontWeights[9],
+          width: theme.space[23],
+          backgroundColor: theme.colors.whites[8],
+        }}
+      >
+        {!isActive ? "START" : "STOP"}
+      </Button>
     </Flex>
   );
 };

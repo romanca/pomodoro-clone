@@ -5,11 +5,11 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { switchCounter } from "../../redux/actions/actions";
+import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
 
 interface IProps {
   isActive: boolean;
-  handleStopCounter: () => void;
+  handleStopCounter?: () => void;
   handleFalseACtive: () => void;
   handleActiveTrue: () => void;
 }
@@ -26,26 +26,30 @@ const PomodoroCounter: React.FC<IProps> = ({
     0,
     time.count
   );
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
+  );
 
-  const counter = () => {
-    return (
-      <Flex>
-        <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
-        <Box>:</Box>
-        <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
-      </Flex>
-    );
-  };
+  const selectedCounter = useSelector(
+    (state: RootState) => state.pomodoroCounter.selectedCounter
+  );
 
   const conditionalHandler = () => {
     if (minutes === 0 && seconds === 55) {
       setTimeout(() => {
         stopCounter();
         handleFalseACtive();
+        dispatch(switchCounter(rawCounterData[1].value));
+        dispatch(setSelectedCounter(rawCounterData[1].value));
       });
-      dispatch(switchCounter("shortBreakCounter"));
     } else {
-      return counter();
+      return (
+        <Flex>
+          <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
+          <Box>:</Box>
+          <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
+        </Flex>
+      );
     }
   };
 
