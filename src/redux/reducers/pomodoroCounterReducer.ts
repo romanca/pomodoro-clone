@@ -1,6 +1,9 @@
+import { items } from "../../shared/mockData";
 import {
   ADD_POMODORO_TIME,
   AUTO_BREAK,
+  FETCH_ITEMS,
+  SET_SELECTED_COUNTER,
   SWITCH_COUNTER,
 } from "./../actions/actionTypes";
 
@@ -10,15 +13,18 @@ const initialState: TState = {
   long: 15,
   autoBreak: false,
   counter: "pomodoroCounter",
+  selectedCounter: "pomodoroCounter",
+  data: items,
 };
 
-const pomodoroCounter = (state = initialState, action: any) => {
+const pomodoroCounter = (state = initialState, action: Action) => {
   switch (action.type) {
     case ADD_POMODORO_TIME:
       return {
         ...state,
-        ...action.payload,
+        ...(action.payload as {}),
       };
+
     case AUTO_BREAK:
       return {
         ...state,
@@ -30,6 +36,19 @@ const pomodoroCounter = (state = initialState, action: any) => {
         ...state,
         counter: action.payload,
       };
+
+    case SET_SELECTED_COUNTER:
+      return {
+        ...state,
+        selectedCounter: action.payload,
+      };
+
+    case FETCH_ITEMS:
+      return {
+        ...state,
+        data: state.data,
+      };
+
     default:
       return state;
   }

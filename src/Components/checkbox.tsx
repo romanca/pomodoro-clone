@@ -8,11 +8,15 @@ const CheckboxInput = () => {
   const autoSwitch = useSelector(
     (state: RootState) => state.pomodoroCounter.autoBreak
   );
+  const selectedCounter = useSelector(
+    (state: RootState) => state.pomodoroCounter.selectedCounter
+  );
   const dispatch = useDispatch();
- 
 
   const handleChange = () => {
-    dispatch({ type: AUTO_BREAK });
+    if (selectedCounter === "pomodoroCounter") {
+      dispatch({ type: AUTO_BREAK });
+    }
   };
 
   return (

@@ -8,14 +8,17 @@ const Layout = () => {
   const valueSelect = useSelector(
     (state: RootState) => state.pomodoroCounter.counter
   );
+  const rawCounterData = useSelector(
+    (state: RootState) => state.pomodoroCounter.data
+  );
 
   const switchColors =
-    valueSelect === "pomodoroCounter"
+    valueSelect === rawCounterData[0].value
       ? theme.colors.danger[1]
-      : valueSelect === "shortBreakCounter"
-      ? "rgb(70, 142, 145)"
-      : valueSelect === "longBreakCounter"
-      ? "rgb(67, 126, 168)"
+      : valueSelect === rawCounterData[1].value
+      ? theme.colors.success[2]
+      : valueSelect === rawCounterData[2].value
+      ? theme.colors.primary[1]
       : theme.colors.danger[1];
 
   return (

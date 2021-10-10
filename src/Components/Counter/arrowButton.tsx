@@ -5,7 +5,7 @@ import Icon from "../Icon";
 
 interface IProps {
   isActive: boolean;
-  handleStopCounter: () => void;
+  handleStopCounter?: () => void;
 }
 
 const ArrowButton: React.FC<IProps> = ({ isActive, handleStopCounter }) => {

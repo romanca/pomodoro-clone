@@ -64,9 +64,9 @@ const theme = {
   radii: [0, 2, 4, 6, 8, 10, 12, 16, 0.9],
   colors: {
     info: "#1ecbe1",
-    primary: "#1676e9",
+    primary: ["#1676e9", "rgb(67, 126, 168)"],
     danger: ["#e72918", "rgb(219, 82, 77)", "rgba(182, 165, 166, 0.2)"],
-    success: ["#6bc33c", "rgba(132, 199, 51, 0.8)"],
+    success: ["#6bc33c", "rgba(132, 199, 51, 0.8)", "rgb(70, 142, 145)"],
     warning: "#fff900",
     blacks: [
       "rgba(0,0,0)", //0
