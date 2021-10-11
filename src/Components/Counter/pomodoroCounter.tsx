@@ -31,7 +31,7 @@ const PomodoroCounter: React.FC<IProps> = ({
   );
 
   const conditionalHandler = () => {
-    if (minutes === 0 && seconds === 55) {
+    if (minutes === 0 && seconds === 0) {
       setTimeout(() => {
         stopCounter();
         handleFalseACtive();
