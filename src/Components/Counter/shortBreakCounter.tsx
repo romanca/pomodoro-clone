@@ -43,7 +43,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
         setTimeout(() => {
           handleActiveTrue();
           startCounter();
-        }, 100);
+        });
       }
     } else {
       if (minutes === 0 && seconds === 0) {

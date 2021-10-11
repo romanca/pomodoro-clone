@@ -31,13 +31,20 @@ const PomodoroCounter: React.FC<IProps> = ({
   );
 
   const conditionalHandler = () => {
-    if (minutes === 0 && seconds === 55) {
+    if (minutes === 0 && seconds === 0) {
       setTimeout(() => {
         stopCounter();
         handleFalseACtive();
         dispatch(switchCounter(rawCounterData[1].value));
         dispatch(setSelectedCounter(rawCounterData[1].value));
-      });
+      }, 1000);
+      return (
+        <Flex>
+          <Box>{minutes < 10 ? "0" + minutes : minutes}</Box>
+          <Box>:</Box>
+          <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
+        </Flex>
+      );
     } else {
       return (
         <Flex>
