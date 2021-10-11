@@ -35,21 +35,27 @@ const ShortBreakCounter: React.FC<IProps> = ({
   const conditionalHandler = () => {
     if (autoBreakSwitch) {
       if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter(rawCounterData[2].value));
-        dispatch(setSelectedCounter(rawCounterData[2].value));
+        setTimeout(() => {
+          handleFalseACtive();
+          stopCounter();
+          dispatch(switchCounter(rawCounterData[0].value));
+          dispatch(setSelectedCounter(rawCounterData[0].value));
+        }, 1000);
       }
       if (minutes !== 0 && seconds === 0) {
         setTimeout(() => {
           handleActiveTrue();
           startCounter();
-        });
+        }, 1000);
       }
     } else {
       if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter(rawCounterData[2].value));
-        dispatch(setSelectedCounter(rawCounterData[2].value));
+        setTimeout(() => {
+          handleFalseACtive();
+          stopCounter();
+          dispatch(switchCounter(rawCounterData[0].value));
+          dispatch(setSelectedCounter(rawCounterData[0].value));
+        }, 1000);
       }
     }
     return (
