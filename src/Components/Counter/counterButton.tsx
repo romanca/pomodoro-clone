@@ -2,6 +2,8 @@ import { Button, Flex } from "@theme-ui/components";
 import React from "react";
 import { useSelector } from "react-redux";
 import theme from "../../shared/theme";
+import Sound from "react-sound";
+import sound from "../../sound.mp3";
 
 interface IProps {
   startCounter: () => void;
@@ -25,6 +27,12 @@ const CounterButton: React.FC<IProps> = ({
     (state: RootState) => state.pomodoroCounter.data
   );
 
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  const handlePlaying = () => {
+    setIsPlaying((current) => !current);
+  };
+
   const switchColors =
     valueSelect === rawCounterData[0].value
       ? theme.colors.danger[1]
@@ -37,11 +45,19 @@ const CounterButton: React.FC<IProps> = ({
   const handleStartCounter = () => {
     startCounter();
     handleActiveTrue();
+    handlePlaying();
+    setTimeout(() => {
+      handlePlaying();
+    }, 200);
   };
 
   const handleStopCounter = () => {
     handleFalseACtive && handleFalseACtive();
     stopCounter();
+    handlePlaying();
+    setTimeout(() => {
+      handlePlaying();
+    }, 200);
   };
 
   return (
@@ -51,6 +67,10 @@ const CounterButton: React.FC<IProps> = ({
         justifyContent: "center",
       }}
     >
+      <Sound
+        url={sound}
+        playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
+      />
       <Button
         onClick={!isActive ? handleStartCounter : handleStopCounter}
         sx={{
