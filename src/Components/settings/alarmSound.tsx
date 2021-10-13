@@ -14,15 +14,13 @@ const AlarmSound = () => {
   const dispatch = useDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const handleSetValue = (value: string) => {
+  const handleSound = (value: string, title: string) => {
     dispatch(soundActions.setSoundValue(value));
+    dispatch(soundActions.setSoundTitle(title));
     handleStartPlaying();
     setTimeout(() => {
       handleStopPlaying();
     }, 10000);
-  };
-  const handleSetTitle = (title: string) => {
-    dispatch(soundActions.setSoundTitle(title));
   };
 
   const handleStartPlaying = () => {
@@ -151,10 +149,9 @@ const AlarmSound = () => {
               >
                 <Box sx={{ display: "block", padding: "8px 0px" }}>
                   <Flex
-                    onClick={() => {
-                      handleSetTitle(sounds[0].title);
-                      handleSetValue(sounds[0].value);
-                    }}
+                    onClick={() =>
+                      handleSound(sounds[0].value, sounds[0].title)
+                    }
                     sx={{
                       padding: 12,
                       boxSizing: "border-box",
@@ -167,10 +164,9 @@ const AlarmSound = () => {
                     Bell
                   </Flex>
                   <Flex
-                    onClick={() => {
-                      handleSetTitle(sounds[1].title);
-                      handleSetValue(sounds[1].value);
-                    }}
+                    onClick={() =>
+                      handleSound(sounds[1].value, sounds[1].title)
+                    }
                     sx={{
                       padding: 12,
                       boxSizing: "border-box",
@@ -183,10 +179,9 @@ const AlarmSound = () => {
                     Bird
                   </Flex>
                   <Flex
-                    onClick={() => {
-                      handleSetTitle(sounds[2].title);
-                      handleSetValue(sounds[2].value);
-                    }}
+                    onClick={() =>
+                      handleSound(sounds[2].value, sounds[2].title)
+                    }
                     style={{
                       padding: 12,
                       boxSizing: "border-box",
@@ -199,10 +194,9 @@ const AlarmSound = () => {
                     Fall
                   </Flex>
                   <Flex
-                    onClick={() => {
-                      handleSetTitle(sounds[3].title);
-                      handleSetValue(sounds[3].value);
-                    }}
+                    onClick={() =>
+                      handleSound(sounds[3].value, sounds[3].title)
+                    }
                     style={{
                       padding: 12,
                       boxSizing: "border-box",
