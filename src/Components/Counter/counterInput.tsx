@@ -1,6 +1,6 @@
 import { Input } from "@theme-ui/components";
 import React from "react";
-import theme from "../shared/theme";
+import theme from "../../shared/theme";
 
 interface IProps {
   value: number;

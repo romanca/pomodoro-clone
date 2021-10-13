@@ -56,6 +56,8 @@ const PomodoroCounter: React.FC<IProps> = ({
     }
   };
 
+  console.log(isActive);
+
   return (
     <Flex
       sx={{

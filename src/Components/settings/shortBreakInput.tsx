@@ -1,7 +1,7 @@
 import { Box } from "@theme-ui/components";
 import React from "react";
 import theme from "../../shared/theme";
-import CounterInput from "../counterInput";
+import CounterInput from "../Counter/counterInput";
 
 interface IProps {
   value: number;
