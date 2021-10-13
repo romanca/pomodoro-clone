@@ -14,6 +14,8 @@ const AlarmSound = () => {
   const dispatch = useDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
 
+  console.log(title);
+
   const handleSound = (value: string, title: string) => {
     dispatch(soundActions.setSoundValue(value));
     dispatch(soundActions.setSoundTitle(title));
