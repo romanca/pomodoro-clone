@@ -6,6 +6,7 @@ import SettingsInputs from "./settingsInputs";
 import { useSelector, useDispatch } from "react-redux";
 import { addPomodoroTime } from "../../redux/actions/actions";
 import AutoBreakStart from "./autoBreakStart";
+import AlarmSound from "./alarmSound";
 
 const SettingsModalContent = () => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
@@ -109,6 +110,7 @@ const SettingsModalContent = () => {
       </Flex>
       <SettingsInputs values={values} onChange={handleInputChange} />
       <AutoBreakStart />
+      <AlarmSound />
       <Box
         style={{
           borderTop: `${theme.space[36]} solid ${theme.colors.danger[2]}`,

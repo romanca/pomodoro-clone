@@ -7,7 +7,7 @@ import {
   SWITCH_COUNTER,
 } from "./../actions/actionTypes";
 
-const initialState: TState = {
+const initialState = {
   count: 25,
   short: 5,
   long: 15,

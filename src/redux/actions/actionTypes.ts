@@ -3,3 +3,6 @@ export const AUTO_BREAK = "AUTO_BREAK";
 export const SWITCH_COUNTER = "SWITCH_COUNTER";
 export const SET_SELECTED_COUNTER = "SET_SELECTED_COUNTER";
 export const FETCH_ITEMS = "FETCH_ITEMS";
+export const FETCH_SOUNDS = "FETCH_SOUNDS";
+export const SET_SOUND_VALUE = "SET_SOUND_VALUE";
+export const SET_SOUND_TITLE = "SET_SOUND_TITLE";

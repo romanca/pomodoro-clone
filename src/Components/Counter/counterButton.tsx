@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import theme from "../../shared/theme";
 import Sound from "react-sound";
-import sound from "../../sound.mp3";
+import popUp from "../../assets/popUp.mp3";
 
 interface IProps {
   startCounter: () => void;
@@ -68,7 +68,7 @@ const CounterButton: React.FC<IProps> = ({
       }}
     >
       <Sound
-        url={sound}
+        url={popUp}
         playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
       />
       <Button

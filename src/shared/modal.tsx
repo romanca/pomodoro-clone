@@ -17,7 +17,7 @@ const ModalDialog: React.FC<IProps> = ({
       open={visible}
       contentStyle={{
         borderRadius: theme.borderRadiuss[2],
-        zIndex: theme.space[45],
+        overflow: "visible",
       }}
       closeModalDialog={closeModalDialog}
     >
