@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import theme from "../../shared/theme";
 import Sound from "react-sound";
-import popUp from "../../assets/popUp.mp3";
+import { soundOptions } from "../../shared/mockData";
 
 interface IProps {
   startCounter: () => void;
@@ -27,12 +27,6 @@ const CounterButton: React.FC<IProps> = ({
     (state: RootState) => state.pomodoroCounter.data
   );
 
-  const [isPlaying, setIsPlaying] = React.useState(false);
-
-  const handlePlaying = () => {
-    setIsPlaying((current) => !current);
-  };
-
   const switchColors =
     valueSelect === rawCounterData[0].value
       ? theme.colors.danger[1]
@@ -41,6 +35,12 @@ const CounterButton: React.FC<IProps> = ({
       : valueSelect === rawCounterData[2].value
       ? theme.colors.primary[1]
       : theme.colors.danger[1];
+
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
+  const handlePlaying = () => {
+    setIsPlaying((current) => !current);
+  };
 
   const handleStartCounter = () => {
     startCounter();
@@ -68,7 +68,7 @@ const CounterButton: React.FC<IProps> = ({
       }}
     >
       <Sound
-        url={popUp}
+        url={soundOptions[4].value}
         playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
       />
       <Button

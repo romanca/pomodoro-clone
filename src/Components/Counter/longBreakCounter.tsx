@@ -5,11 +5,16 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
+import {
+  setSelectedCounter,
+  soundActions,
+  switchCounter,
+} from "../../redux/actions/actions";
+import SoundPlayer from "./soundPlayer";
 
 interface IProps {
   isActive: boolean;
-  // handleStopCounter: () => void;
+  handleStopCounter: () => void;
   handleFalseACtive: () => void;
   handleActiveTrue: () => void;
   autoBreakSwitch: boolean;
@@ -17,7 +22,7 @@ interface IProps {
 
 const LongBreakCounter: React.FC<IProps> = ({
   isActive,
-  // handleStopCounter,
+  handleStopCounter,
   handleFalseACtive,
   handleActiveTrue,
   autoBreakSwitch,
@@ -30,26 +35,41 @@ const LongBreakCounter: React.FC<IProps> = ({
   const rawCounterData = useSelector(
     (state: RootState) => state.pomodoroCounter.data
   );
+  const value = useSelector((state: RootState) => state.alarmSound.value);
   const dispatch = useDispatch();
 
   const conditionalHandler = () => {
     if (autoBreakSwitch) {
       if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter(rawCounterData[0].value));
-        dispatch(setSelectedCounter(rawCounterData[0].value));
+        setTimeout(() => {
+          dispatch(soundActions.setPlayingSound(false));
+        }, 8000);
+        setTimeout(() => {
+          handleFalseACtive();
+          stopCounter();
+          dispatch(switchCounter(rawCounterData[0].value));
+          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(soundActions.setPlayingSound(true));
+        }, 1000);
       }
       if (minutes !== 0 && seconds === 0) {
         setTimeout(() => {
           handleActiveTrue();
           startCounter();
-        });
+        }, 1000);
       }
     } else {
       if (minutes === 0 && seconds === 0) {
-        handleFalseACtive();
-        dispatch(switchCounter(rawCounterData[0].value));
-        dispatch(setSelectedCounter(rawCounterData[0].value));
+        setTimeout(() => {
+          dispatch(soundActions.setPlayingSound(false));
+        }, 8000);
+        setTimeout(() => {
+          handleFalseACtive();
+          stopCounter();
+          dispatch(switchCounter(rawCounterData[0].value));
+          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(soundActions.setPlayingSound(true));
+        }, 1000);
       }
     }
     return (
@@ -59,6 +79,12 @@ const LongBreakCounter: React.FC<IProps> = ({
         <Box>{seconds < 10 ? "0" + seconds : seconds}</Box>
       </Flex>
     );
+  };
+
+  const handleFinishPlayingSound = (value: boolean) => {
+    setTimeout(() => {
+      dispatch(soundActions.setPlayingSound(false));
+    }, 5000);
   };
 
   return (
@@ -75,6 +101,10 @@ const LongBreakCounter: React.FC<IProps> = ({
         position: "relative",
       }}
     >
+      <SoundPlayer
+        value={value}
+        onFinishedPlaying={() => handleFinishPlayingSound(false)}
+      />
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}
@@ -83,10 +113,7 @@ const LongBreakCounter: React.FC<IProps> = ({
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
       />
-      <ArrowButton
-        isActive={isActive}
-        // handleStopCounter={handleStopCounter}
-      />
+      <ArrowButton isActive={isActive} handleStopCounter={handleStopCounter} />
     </Flex>
   );
 };

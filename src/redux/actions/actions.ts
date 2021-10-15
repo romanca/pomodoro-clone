@@ -3,9 +3,12 @@ import {
   AUTO_BREAK,
   FETCH_ITEMS,
   FETCH_SOUNDS,
+  SET_PLAYING_SOUND,
   SET_SELECTED_COUNTER,
   SET_SOUND_TITLE,
   SET_SOUND_VALUE,
+  SET_START_PLAYING_SOUND,
+  SET_STOP_PLAYING_SOUND,
   SWITCH_COUNTER,
 } from "./actionTypes";
 
@@ -46,4 +49,10 @@ export const soundActions = {
     ({ type: SET_SOUND_VALUE, payload } as const),
   setSoundTitle: (payload: string) =>
     ({ type: SET_SOUND_TITLE, payload } as const),
+  setPlayingSound: (payload: boolean) =>
+    ({ type: SET_PLAYING_SOUND, payload } as const),
+  setStartPlayingSound: (payload: boolean) =>
+    ({ type: SET_START_PLAYING_SOUND, payload } as const),
+  setStopPlayingSound: (payload: boolean) =>
+    ({ type: SET_STOP_PLAYING_SOUND, payload } as const),
 };

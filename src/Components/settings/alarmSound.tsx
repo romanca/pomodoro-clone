@@ -7,14 +7,14 @@ import { soundActions } from "../../redux/actions/actions";
 
 const AlarmSound = () => {
   const [open, setOpen] = React.useState(false);
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const sounds = useSelector((state: RootState) => state.alarmSound.sounds);
   const value = useSelector((state: RootState) => state.alarmSound.value);
   const title = useSelector((state: RootState) => state.alarmSound.title);
   const dispatch = useDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
-
-  console.log(title);
+  const isPlayingStart = useSelector(
+    (state: RootState) => state.alarmSound.isPlayingStart
+  );
 
   const handleSound = (value: string, title: string) => {
     dispatch(soundActions.setSoundValue(value));
@@ -26,20 +26,20 @@ const AlarmSound = () => {
   };
 
   const handleStartPlaying = () => {
-    setIsPlaying(true);
+    dispatch(soundActions.setPlayingSound(true));
   };
 
   const handleStopPlaying = () => {
-    setIsPlaying(false);
+    dispatch(soundActions.setPlayingSound(false));
   };
 
   const handleOpenClose = () => {
     setOpen((current) => !current);
   };
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setOpen(false);
-  };
+  }, [setOpen]);
 
   const handleClickOutside = React.useCallback(
     (e: MouseEvent) => {
@@ -71,7 +71,9 @@ const AlarmSound = () => {
     >
       <Sound
         url={value}
-        playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
+        playStatus={
+          isPlayingStart ? Sound.status.PLAYING : Sound.status.STOPPED
+        }
       />
       <Flex
         style={{

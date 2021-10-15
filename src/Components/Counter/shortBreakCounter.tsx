@@ -5,7 +5,12 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
+import {
+  setSelectedCounter,
+  soundActions,
+  switchCounter,
+} from "../../redux/actions/actions";
+import SoundPlayer from "./soundPlayer";
 
 interface IProps {
   isActive: boolean;
@@ -31,15 +36,26 @@ const ShortBreakCounter: React.FC<IProps> = ({
   const rawCounterData = useSelector(
     (state: RootState) => state.pomodoroCounter.data
   );
+  const value = useSelector((state: RootState) => state.alarmSound.value);
+
+  const handleFinishPlayingSound = (value: boolean) => {
+    setTimeout(() => {
+      dispatch(soundActions.setPlayingSound(false));
+    }, 10000);
+  };
 
   const conditionalHandler = () => {
     if (autoBreakSwitch) {
       if (minutes === 0 && seconds === 0) {
         setTimeout(() => {
+          dispatch(soundActions.setPlayingSound(false));
+        }, 8000);
+        setTimeout(() => {
           handleFalseACtive();
           stopCounter();
-          dispatch(switchCounter(rawCounterData[0].value));
-          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(switchCounter(rawCounterData[2].value));
+          dispatch(setSelectedCounter(rawCounterData[2].value));
+          dispatch(soundActions.setPlayingSound(true));
         }, 1000);
       }
       if (minutes !== 0 && seconds === 0) {
@@ -51,10 +67,14 @@ const ShortBreakCounter: React.FC<IProps> = ({
     } else {
       if (minutes === 0 && seconds === 0) {
         setTimeout(() => {
+          dispatch(soundActions.setPlayingSound(false));
+        }, 8000);
+        setTimeout(() => {
           handleFalseACtive();
           stopCounter();
-          dispatch(switchCounter(rawCounterData[0].value));
-          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(switchCounter(rawCounterData[2].value));
+          dispatch(setSelectedCounter(rawCounterData[2].value));
+          dispatch(soundActions.setPlayingSound(true));
         }, 1000);
       }
     }
@@ -73,7 +93,7 @@ const ShortBreakCounter: React.FC<IProps> = ({
         fontSize: theme.space[31],
         fontWeight: "bold",
         marginTop: theme.space[9],
-        fontFamily: "ArialRoundedMTBold",
+        fontFamily: "ArialRoundedMTBold, ArialRoundedMT",
         color: "white",
         alignItems: "center",
         justifyContent: "center",
@@ -81,6 +101,10 @@ const ShortBreakCounter: React.FC<IProps> = ({
         position: "relative",
       }}
     >
+      <SoundPlayer
+        value={value}
+        onFinishedPlaying={() => handleFinishPlayingSound(false)}
+      />
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}

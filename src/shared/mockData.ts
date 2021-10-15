@@ -2,6 +2,7 @@ import bell from "../assets/bell.mp3";
 import bird from "../assets/bird.mp3";
 import fall from "../assets/fall.mp3";
 import kitchen from "../assets/kitchen.mp3";
+import popUp from "../assets/popUp.mp3";
 
 export const items: TCounter[] = [
   {
@@ -41,5 +42,10 @@ export const soundOptions = [
     title: "Kitchen",
     value: kitchen,
     id: 4,
+  },
+  {
+    title: "popUp",
+    value: popUp,
+    id: 5,
   },
 ];
