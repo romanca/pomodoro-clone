@@ -1,9 +1,7 @@
 import { Box, Flex } from "@theme-ui/components";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import theme from "../../shared/theme";
 import CheckboxInput from "../checkbox";
-import Checkbox from "../checkbox";
 
 const AutoBreakStart = () => {
   return (

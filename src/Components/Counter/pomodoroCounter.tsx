@@ -5,7 +5,12 @@ import theme from "../../shared/theme";
 import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
+import {
+  setSelectedCounter,
+  soundActions,
+  switchCounter,
+} from "../../redux/actions/actions";
+import SoundPlayer from "./soundPlayer";
 
 interface IProps {
   isActive: boolean;
@@ -21,6 +26,7 @@ const PomodoroCounter: React.FC<IProps> = ({
   handleActiveTrue,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
+  const sound = useSelector((state: RootState) => state.alarmSound.sound);
   const dispatch = useDispatch();
   const { seconds, minutes, startCounter, stopCounter } = useCounter(
     0,
@@ -30,9 +36,19 @@ const PomodoroCounter: React.FC<IProps> = ({
     (state: RootState) => state.pomodoroCounter.data
   );
 
+  const handleFinishPlayingSound = (value: boolean) => {
+    setTimeout(() => {
+      dispatch(soundActions.setPlayingSound(false));
+    }, 10000);
+  };
+
   const conditionalHandler = () => {
     if (minutes === 0 && seconds === 0) {
       setTimeout(() => {
+        dispatch(soundActions.setPlayingSound(false));
+      }, 8000);
+      setTimeout(() => {
+        dispatch(soundActions.setPlayingSound(true));
         stopCounter();
         handleFalseACtive();
         dispatch(switchCounter(rawCounterData[1].value));
@@ -70,6 +86,10 @@ const PomodoroCounter: React.FC<IProps> = ({
         position: "relative",
       }}
     >
+      <SoundPlayer
+        value={sound.value}
+        onFinishedPlaying={() => handleFinishPlayingSound(false)}
+      />
       {conditionalHandler()}
       <CounterButton
         startCounter={startCounter}

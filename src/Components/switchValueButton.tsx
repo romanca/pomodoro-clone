@@ -1,6 +1,5 @@
 import { Button } from "@theme-ui/components";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import theme from "../shared/theme";
 
 interface IProps {

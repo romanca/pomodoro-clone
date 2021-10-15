@@ -19,4 +19,10 @@ interface TCounter {
   id: number;
 }
 
+interface TSound {
+  title: string;
+  value: string;
+  id: number;
+}
+
 type RootState = ReturnType<typeof rootReducer>;

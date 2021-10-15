@@ -1,6 +1,7 @@
-import { Box, Input } from "@theme-ui/components";
+import { Box } from "@theme-ui/components";
 import React from "react";
 import theme from "../../shared/theme";
+import CounterInput from "../Counter/counterInput";
 
 interface IProps {
   value: number;
@@ -21,26 +22,7 @@ const LongBreakInput: React.FC<IProps> = ({ value, onChange, name }) => {
       >
         Long Break
       </Box>
-      <Input
-        value={value}
-        onChange={onChange}
-        name={name}
-        type="number"
-        min="0"
-        sx={{
-          borderRadius: theme.space[34],
-          background: theme.colors.greys[1],
-          fontSize: theme.space[3],
-          padding: theme.space[35],
-          boxShadow: "none",
-          border: "none",
-          outline: "none",
-          color: theme.colors.greys[2],
-          width: theme.space[8],
-          boxSizing: "border-box",
-          fontFamily: "ArialRoundedMTBold",
-        }}
-      />
+      <CounterInput value={value} onChange={onChange} name={name} />
     </Box>
   );
 };

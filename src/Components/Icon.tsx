@@ -7,6 +7,7 @@ const IconNamesMap = {
   rightArrow: "fa fa-caret-right",
   minus: "fa fa-minus",
   cross: "fa fa-times",
+  caretDown: "fa fa-caret-down",
 };
 
 export type IconName = keyof typeof IconNamesMap;

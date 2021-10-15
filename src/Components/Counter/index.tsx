@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex } from "theme-ui";
-import { setSelectedCounter, switchCounter } from "../../redux/actions/actions";
+import {
+  setSelectedCounter,
+  soundActions,
+  switchCounter,
+} from "../../redux/actions/actions";
 import theme from "../../shared/theme";
 import SwitchValueButton from "../switchValueButton";
 import LongBreakCounter from "./longBreakCounter";
@@ -60,7 +64,7 @@ const Counter = () => {
     return (
       <LongBreakCounter
         isActive={isActive}
-        // handleStopCounter={handleStopCounter}
+        handleStopCounter={handleStopCounter}
         handleFalseACtive={handleFalseACtive}
         handleActiveTrue={handleActiveTrue}
         autoBreakSwitch={autoBreakSwitch}
@@ -77,10 +81,12 @@ const Counter = () => {
         dispatch(switchCounter(value));
         dispatch(setSelectedCounter(value));
         handleFalseACtive();
+        dispatch(soundActions.setStopPlayingSound(false));
       }
     } else {
       dispatch(switchCounter(value));
       dispatch(setSelectedCounter(value));
+      dispatch(soundActions.setStopPlayingSound(false));
     }
   };
 
@@ -92,10 +98,12 @@ const Counter = () => {
       if (alertMessage && valueSelect === rawCounterData[0].value) {
         dispatch(switchCounter(rawCounterData[1].value));
         dispatch(setSelectedCounter(rawCounterData[1].value));
+        dispatch(soundActions.setStopPlayingSound(false));
         handleActive();
       } else {
         dispatch(switchCounter(rawCounterData[0].value));
         dispatch(setSelectedCounter(rawCounterData[0].value));
+        dispatch(soundActions.setStopPlayingSound(false));
         handleActive();
       }
     }
