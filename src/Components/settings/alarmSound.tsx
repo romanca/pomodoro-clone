@@ -1,27 +1,28 @@
 import { Box, Flex } from "@theme-ui/components";
 import React from "react";
 import Icon from "../Icon";
-import Sound from "react-sound";
 import { useDispatch, useSelector } from "react-redux";
 import { soundActions } from "../../redux/actions/actions";
+import SoundPlayer from "../Counter/soundPlayer";
 
 const AlarmSound = () => {
   const [open, setOpen] = React.useState(false);
   const sounds = useSelector((state: RootState) => state.alarmSound.sounds);
-  const value = useSelector((state: RootState) => state.alarmSound.value);
-  const title = useSelector((state: RootState) => state.alarmSound.title);
   const dispatch = useDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
-  const isPlayingStart = useSelector(
-    (state: RootState) => state.alarmSound.isPlayingStart
-  );
+  const sound = useSelector((state: RootState) => state.alarmSound.sound);
 
-  const handleSound = (value: string, title: string) => {
-    dispatch(soundActions.setSoundValue(value));
-    dispatch(soundActions.setSoundTitle(title));
+  const handleSounds = (sound: TSound) => {
+    dispatch(soundActions.setSound(sound));
     handleStartPlaying();
     setTimeout(() => {
       handleStopPlaying();
+    }, 10000);
+  };
+
+  const handleFinishPlayingSound = (value: boolean) => {
+    setTimeout(() => {
+      dispatch(soundActions.setPlayingSound(false));
     }, 10000);
   };
 
@@ -69,11 +70,9 @@ const AlarmSound = () => {
         justifyContent: "center",
       }}
     >
-      <Sound
-        url={value}
-        playStatus={
-          isPlayingStart ? Sound.status.PLAYING : Sound.status.STOPPED
-        }
+      <SoundPlayer
+        value={sound.value}
+        onFinishedPlaying={() => handleFinishPlayingSound(false)}
       />
       <Flex
         style={{
@@ -122,7 +121,7 @@ const AlarmSound = () => {
                 fontSize: 14,
               }}
             >
-              {title || sounds[0].title}
+              {sound.title}
               <Icon
                 name="caretDown"
                 style={{
@@ -152,66 +151,24 @@ const AlarmSound = () => {
                 }}
               >
                 <Box sx={{ display: "block", padding: "8px 0px" }}>
-                  <Flex
-                    onClick={() =>
-                      handleSound(sounds[0].value, sounds[0].title)
-                    }
-                    sx={{
-                      padding: 12,
-                      boxSizing: "border-box",
-                      color: "rgb(120, 120, 120)",
-                      fontWeight: 500,
-                      cursor: "pointer",
-                      alignItems: "center",
-                    }}
-                  >
-                    Bell
-                  </Flex>
-                  <Flex
-                    onClick={() =>
-                      handleSound(sounds[1].value, sounds[1].title)
-                    }
-                    sx={{
-                      padding: 12,
-                      boxSizing: "border-box",
-                      color: "rgb(120, 120, 120)",
-                      fontWeight: 500,
-                      cursor: "pointer",
-                      alignItems: "center",
-                    }}
-                  >
-                    Bird
-                  </Flex>
-                  <Flex
-                    onClick={() =>
-                      handleSound(sounds[2].value, sounds[2].title)
-                    }
-                    style={{
-                      padding: 12,
-                      boxSizing: "border-box",
-                      color: "rgb(120, 120, 120)",
-                      fontWeight: 500,
-                      cursor: "pointer",
-                      alignItems: "center",
-                    }}
-                  >
-                    Fall
-                  </Flex>
-                  <Flex
-                    onClick={() =>
-                      handleSound(sounds[3].value, sounds[3].title)
-                    }
-                    style={{
-                      padding: 12,
-                      boxSizing: "border-box",
-                      color: "rgb(120, 120, 120)",
-                      fontWeight: 500,
-                      cursor: "pointer",
-                      alignItems: "center",
-                    }}
-                  >
-                    Kitchen
-                  </Flex>
+                  {sounds
+                    .filter((sound: TSound) => sound.title !== "popUp")
+                    .map((sound: TSound) => (
+                      <Flex
+                        key={sound.id}
+                        onClick={() => handleSounds(sound)}
+                        sx={{
+                          padding: 12,
+                          boxSizing: "border-box",
+                          color: "rgb(120, 120, 120)",
+                          fontWeight: 500,
+                          cursor: "pointer",
+                          alignItems: "center",
+                        }}
+                      >
+                        {sound.title}
+                      </Flex>
+                    ))}
                 </Box>
               </Box>
             )}

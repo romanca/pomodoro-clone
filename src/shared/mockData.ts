@@ -22,7 +22,7 @@ export const items: TCounter[] = [
   },
 ];
 
-export const soundOptions = [
+export const soundOptions: TSound[] = [
   {
     title: "Bell",
     value: bell,

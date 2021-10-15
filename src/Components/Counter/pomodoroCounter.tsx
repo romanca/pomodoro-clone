@@ -26,7 +26,7 @@ const PomodoroCounter: React.FC<IProps> = ({
   handleActiveTrue,
 }) => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
-  const value = useSelector((state: RootState) => state.alarmSound.value);
+  const sound = useSelector((state: RootState) => state.alarmSound.sound);
   const dispatch = useDispatch();
   const { seconds, minutes, startCounter, stopCounter } = useCounter(
     0,
@@ -87,7 +87,7 @@ const PomodoroCounter: React.FC<IProps> = ({
       }}
     >
       <SoundPlayer
-        value={value}
+        value={sound.value}
         onFinishedPlaying={() => handleFinishPlayingSound(false)}
       />
       {conditionalHandler()}

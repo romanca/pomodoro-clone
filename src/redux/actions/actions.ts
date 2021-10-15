@@ -5,8 +5,7 @@ import {
   FETCH_SOUNDS,
   SET_PLAYING_SOUND,
   SET_SELECTED_COUNTER,
-  SET_SOUND_TITLE,
-  SET_SOUND_VALUE,
+  SET_SOUND,
   SET_START_PLAYING_SOUND,
   SET_STOP_PLAYING_SOUND,
   SWITCH_COUNTER,
@@ -45,10 +44,7 @@ export const fetchItems = () => {
 
 export const soundActions = {
   fetchSounds: () => ({ type: FETCH_SOUNDS } as const),
-  setSoundValue: (payload: string) =>
-    ({ type: SET_SOUND_VALUE, payload } as const),
-  setSoundTitle: (payload: string) =>
-    ({ type: SET_SOUND_TITLE, payload } as const),
+  setSound: (payload: any) => ({ type: SET_SOUND, payload } as const),
   setPlayingSound: (payload: boolean) =>
     ({ type: SET_PLAYING_SOUND, payload } as const),
   setStartPlayingSound: (payload: boolean) =>

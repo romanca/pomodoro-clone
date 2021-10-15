@@ -35,7 +35,7 @@ const LongBreakCounter: React.FC<IProps> = ({
   const rawCounterData = useSelector(
     (state: RootState) => state.pomodoroCounter.data
   );
-  const value = useSelector((state: RootState) => state.alarmSound.value);
+  const sound = useSelector((state: RootState) => state.alarmSound.sound);
   const dispatch = useDispatch();
 
   const conditionalHandler = () => {
@@ -102,7 +102,7 @@ const LongBreakCounter: React.FC<IProps> = ({
       }}
     >
       <SoundPlayer
-        value={value}
+        value={sound.value}
         onFinishedPlaying={() => handleFinishPlayingSound(false)}
       />
       {conditionalHandler()}

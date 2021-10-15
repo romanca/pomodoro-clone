@@ -3,17 +3,15 @@ import { soundActions } from "../actions/actions";
 import {
   FETCH_SOUNDS,
   SET_PLAYING_SOUND,
-  SET_SOUND_TITLE,
-  SET_SOUND_VALUE,
+  SET_SOUND,
   SET_START_PLAYING_SOUND,
   SET_STOP_PLAYING_SOUND,
 } from "../actions/actionTypes";
 
 const initialSoundState = {
   sounds: soundOptions,
-  value: null,
-  title: null,
   isPlaying: false,
+  sound: soundOptions[0],
 };
 
 export type TSoundAction = ReturnType<
@@ -28,16 +26,10 @@ const alarmSound = (state = initialSoundState, action: TSoundAction) => {
         sounds: state.sounds,
       };
 
-    case SET_SOUND_VALUE:
+    case SET_SOUND:
       return {
         ...state,
-        value: action.payload,
-      };
-
-    case SET_SOUND_TITLE:
-      return {
-        ...state,
-        title: action.payload,
+        sound: action.payload,
       };
 
     case SET_PLAYING_SOUND:
