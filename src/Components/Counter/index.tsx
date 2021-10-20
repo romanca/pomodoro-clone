@@ -2,9 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex } from "theme-ui";
 import {
-  setSelectedCounter,
+  pomodoroCounterActions,
   soundActions,
-  switchCounter,
 } from "../../redux/actions/actions";
 import theme from "../../shared/theme";
 import SwitchValueButton from "../switchValueButton";
@@ -72,23 +71,26 @@ const Counter = () => {
     );
   };
 
-  const getValueHandler = (value: string) => () => {
-    if (isActive) {
-      const alertMessage = window.confirm(
-        "The timer is still running, are you sure you want to switch?"
-      );
-      if (alertMessage) {
-        dispatch(switchCounter(value));
-        dispatch(setSelectedCounter(value));
-        handleFalseACtive();
+  const getValueHandler = React.useCallback(
+    (value: string) => () => {
+      if (isActive) {
+        const alertMessage = window.confirm(
+          "The timer is still running, are you sure you want to switch?"
+        );
+        if (alertMessage) {
+          dispatch(pomodoroCounterActions.switchCounter(value));
+          dispatch(pomodoroCounterActions.setSelectedCounter(value));
+          handleFalseACtive();
+          dispatch(soundActions.setStopPlayingSound(false));
+        }
+      } else {
+        dispatch(pomodoroCounterActions.switchCounter(value));
+        dispatch(pomodoroCounterActions.setSelectedCounter(value));
         dispatch(soundActions.setStopPlayingSound(false));
       }
-    } else {
-      dispatch(switchCounter(value));
-      dispatch(setSelectedCounter(value));
-      dispatch(soundActions.setStopPlayingSound(false));
-    }
-  };
+    },
+    [dispatch, isActive]
+  );
 
   const handleStopCounter = () => {
     if (isActive) {
@@ -96,18 +98,33 @@ const Counter = () => {
         "Are you sure you wanto stop the counter?"
       );
       if (alertMessage && valueSelect === rawCounterData[0].value) {
-        dispatch(switchCounter(rawCounterData[1].value));
-        dispatch(setSelectedCounter(rawCounterData[1].value));
+        dispatch(pomodoroCounterActions.switchCounter(rawCounterData[1].value));
+        dispatch(
+          pomodoroCounterActions.setSelectedCounter(rawCounterData[1].value)
+        );
         dispatch(soundActions.setStopPlayingSound(false));
         handleActive();
       } else {
-        dispatch(switchCounter(rawCounterData[0].value));
-        dispatch(setSelectedCounter(rawCounterData[0].value));
+        dispatch(pomodoroCounterActions.switchCounter(rawCounterData[0].value));
+        dispatch(
+          pomodoroCounterActions.setSelectedCounter(rawCounterData[0].value)
+        );
         dispatch(soundActions.setStopPlayingSound(false));
         handleActive();
       }
     }
   };
+
+  const renderCounterData = React.useCallback(() => {
+    return rawCounterData.map((item: TCounter) => (
+      <SwitchValueButton
+        key={item.id}
+        title={item.title}
+        selected={item.value === selectedCounter}
+        onClick={getValueHandler(item.value)}
+      />
+    ));
+  }, [getValueHandler, rawCounterData, selectedCounter]);
 
   return (
     <Box
@@ -133,14 +150,7 @@ const Counter = () => {
             alignItems: "center",
           }}
         >
-          {rawCounterData.map((item: TCounter) => (
-            <SwitchValueButton
-              key={item.id}
-              title={item.title}
-              selected={item.value === selectedCounter}
-              onClick={getValueHandler(item.value)}
-            />
-          ))}
+          {renderCounterData()}
         </Flex>
         {switchCounters()}
       </Box>

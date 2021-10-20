@@ -6,9 +6,8 @@ import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setSelectedCounter,
+  pomodoroCounterActions,
   soundActions,
-  switchCounter,
 } from "../../redux/actions/actions";
 import SoundPlayer from "./soundPlayer";
 
@@ -51,8 +50,10 @@ const PomodoroCounter: React.FC<IProps> = ({
         dispatch(soundActions.setPlayingSound(true));
         stopCounter();
         handleFalseACtive();
-        dispatch(switchCounter(rawCounterData[1].value));
-        dispatch(setSelectedCounter(rawCounterData[1].value));
+        dispatch(pomodoroCounterActions.switchCounter(rawCounterData[1].value));
+        dispatch(
+          pomodoroCounterActions.setSelectedCounter(rawCounterData[1].value)
+        );
       }, 1000);
       return (
         <Flex>
