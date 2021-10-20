@@ -4,9 +4,9 @@ import { useModal } from "../../Providers/ModalProvider";
 import theme from "../../shared/theme";
 import SettingsInputs from "./settingsInputs";
 import { useSelector, useDispatch } from "react-redux";
-import { addPomodoroTime } from "../../redux/actions/actions";
 import AutoBreakStart from "./autoBreakStart";
 import AlarmSound from "./alarmSound";
+import { pomodoroCounterActions } from "../../redux/actions/actions";
 
 const SettingsModalContent = () => {
   const time = useSelector((state: RootState) => state.pomodoroCounter);
@@ -35,7 +35,7 @@ const SettingsModalContent = () => {
     (values: TState) => {
       if (values.count === 0 || values.short === 0 || values.long === 0) {
       } else {
-        dispatch(addPomodoroTime(values));
+        dispatch(pomodoroCounterActions.addPomodoroTime(values));
         closeModalDialog();
       }
     },
