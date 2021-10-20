@@ -4,6 +4,7 @@ import Icon from "../Icon";
 import { useDispatch, useSelector } from "react-redux";
 import { soundActions } from "../../redux/actions/actions";
 import SoundPlayer from "../Counter/soundPlayer";
+import theme from "../../shared/theme";
 
 const AlarmSound = () => {
   const [open, setOpen] = React.useState(false);
@@ -65,7 +66,7 @@ const AlarmSound = () => {
       sx={{
         borderTop: "1px solid rgba(182, 165, 166, 0.2)",
         padding: "30px 0px",
-        height: 30,
+        height: theme.space[38],
         flexDirection: "column",
         justifyContent: "center",
       }}
@@ -76,14 +77,14 @@ const AlarmSound = () => {
       />
       <Flex
         style={{
-          width: "100%",
+          width: theme.space[8],
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
         <Flex
           style={{
-            color: "rgb(85, 85, 85)",
+            color: theme.colors.greys[2],
             fontWeight: "bold",
             alignItems: "center",
             fontFamily: "ArialRoundedMTBold",
@@ -100,10 +101,10 @@ const AlarmSound = () => {
           <Box
             ref={ref}
             style={{
-              width: 130,
+              width: theme.space[48],
               display: "block",
               position: "relative",
-              fontSize: 14,
+              fontSize: theme.fontSizes[7],
             }}
           >
             <Box
@@ -111,29 +112,29 @@ const AlarmSound = () => {
               style={{
                 cursor: "pointer",
                 position: "relative",
-                width: "100%",
-                color: "rgb(120, 120, 120)",
+                width: theme.space[8],
+                color: theme.colors.greys[5],
                 fontWeight: 500,
-                borderRadius: 4,
-                background: "rgb(235, 235, 235)",
-                padding: 12,
+                borderRadius: theme.borderRadiuss[0],
+                background: theme.colors.greys[6],
+                padding: theme.space[2],
                 boxSizing: "border-box",
-                fontSize: 14,
+                fontSize: theme.fontSizes[7],
               }}
             >
               {sound.title}
               <Icon
                 name="caretDown"
                 style={{
-                  width: 12,
+                  width: theme.space[2],
                   position: "absolute",
-                  top: 14,
-                  right: 12,
-                  opacity: 0.5,
+                  top: theme.space[33],
+                  right: theme.fontSizes[2],
+                  opacity: theme.opacities[3],
                   cursor: "pointer",
-                  color: "rgb(120, 120, 120)",
+                  color: theme.colors.greys[5],
                   fontWeight: 500,
-                  fontSize: 14,
+                  fontSize: theme.fontSizes[7],
                 }}
               />
             </Box>
@@ -142,12 +143,12 @@ const AlarmSound = () => {
                 sx={{
                   position: "absolute",
                   background: "white",
-                  width: "100%",
-                  borderRadius: 4,
-                  zIndex: 1,
+                  width: theme.space[8],
+                  borderRadius: theme.space[0],
+                  zIndex: theme.space[49],
                   boxShadow:
                     "rgb(0 0 0 / 15%) 0px 3px 6px, rgb(0 0 0 / 12%) 0px 2px 4px",
-                  marginTop: 1,
+                  marginTop: theme.space[49],
                 }}
               >
                 <Box sx={{ display: "block", padding: "8px 0px" }}>
@@ -158,9 +159,9 @@ const AlarmSound = () => {
                         key={sound.id}
                         onClick={() => handleSounds(sound)}
                         sx={{
-                          padding: 12,
+                          padding: theme.space[2],
                           boxSizing: "border-box",
-                          color: "rgb(120, 120, 120)",
+                          color: theme.colors.greys[5],
                           fontWeight: 500,
                           cursor: "pointer",
                           alignItems: "center",
