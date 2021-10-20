@@ -6,9 +6,8 @@ import ArrowButton from "./arrowButton";
 import CounterButton from "./counterButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setSelectedCounter,
+  pomodoroCounterActions,
   soundActions,
-  switchCounter,
 } from "../../redux/actions/actions";
 import SoundPlayer from "./soundPlayer";
 
@@ -47,8 +46,12 @@ const LongBreakCounter: React.FC<IProps> = ({
         setTimeout(() => {
           handleFalseACtive();
           stopCounter();
-          dispatch(switchCounter(rawCounterData[0].value));
-          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(
+            pomodoroCounterActions.switchCounter(rawCounterData[0].value)
+          );
+          dispatch(
+            pomodoroCounterActions.setSelectedCounter(rawCounterData[0].value)
+          );
           dispatch(soundActions.setPlayingSound(true));
         }, 1000);
       }
@@ -66,8 +69,12 @@ const LongBreakCounter: React.FC<IProps> = ({
         setTimeout(() => {
           handleFalseACtive();
           stopCounter();
-          dispatch(switchCounter(rawCounterData[0].value));
-          dispatch(setSelectedCounter(rawCounterData[0].value));
+          dispatch(
+            pomodoroCounterActions.switchCounter(rawCounterData[0].value)
+          );
+          dispatch(
+            pomodoroCounterActions.setSelectedCounter(rawCounterData[0].value)
+          );
           dispatch(soundActions.setPlayingSound(true));
         }, 1000);
       }
