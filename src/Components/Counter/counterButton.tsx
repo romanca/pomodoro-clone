@@ -86,6 +86,10 @@ const CounterButton: React.FC<IProps> = ({
           fontWeight: theme.fontWeights[9],
           width: theme.space[23],
           backgroundColor: theme.colors.whites[8],
+          "@media screen and (max-width: 768px)": {
+            fontSize: theme.space[16],
+            width: theme.space[50],
+          },
         }}
       >
         {!isActive ? "START" : "STOP"}

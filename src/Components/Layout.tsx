@@ -31,26 +31,24 @@ const Layout = () => {
       }}
     >
       <Box
-        style={{
+        sx={{
           width: theme.space[13],
+          "@media screen and (max-width: 768px)": {
+            width: theme.space[8],
+            padding: "0px 10px 0px 10px",
+          },
         }}
       >
         <Header />
-        <Box
+        <Flex
           sx={{
-            margin: "auto",
+            alignItems: "center",
+            justifyContent: "center",
             borderTop: `${theme.borders[0]} solid ${theme.colors.blacks[12]}`,
           }}
         >
-          <Box
-            sx={{
-              textAlign: "center",
-              width: theme.space[8],
-            }}
-          >
-            <Counter />
-          </Box>
-        </Box>
+          <Counter />
+        </Flex>
       </Box>
     </Flex>
   );

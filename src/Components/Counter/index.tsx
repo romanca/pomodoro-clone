@@ -129,10 +129,12 @@ const Counter = () => {
   return (
     <Box
       sx={{
-        width: theme.space[14],
-        margin: "auto",
+        width: theme.space[52],
         marginTop: theme.space[15],
         borderRadius: theme.borderRadiuss[1],
+        "@media screen and (max-width: 768px)": {
+          width: theme.space[8],
+        },
       }}
     >
       <Box
