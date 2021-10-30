@@ -85,6 +85,9 @@ const PomodoroCounter: React.FC<IProps> = ({
         justifyContent: "center",
         flexDirection: "column",
         position: "relative",
+        "@media screen and (max-width: 768px)": {
+          fontSize: theme.space[51],
+        },
       }}
     >
       <SoundPlayer
